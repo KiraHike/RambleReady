@@ -4,17 +4,17 @@ export default class NavBar extends React.Component {
 
   makeNavBar() {
     const navArray = [
-      'fas fa-home',
-      'fas fa-dollar-sign',
-      'fas fa-chart-pie',
-      'fas fa-suitcase'
+      'navIcon fas fa-home',
+      'navIcon fas fa-dollar-sign',
+      'navIcon fas fa-chart-pie',
+      'navIcon fas fa-suitcase'
     ];
 
     const navBar = navArray.map(icon => {
       return <li key={icon} className={icon} />;
     });
 
-    return <ul>{navBar}</ul>;
+    return <ul className='navBar'>{navBar}</ul>;
   }
 
   render() {
