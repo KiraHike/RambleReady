@@ -1,4 +1,5 @@
 import React from 'react';
+import AppContext from '../lib/app-context';
 import TripCard from '../components/tripcard';
 
 export default class Trips extends React.Component {
@@ -13,7 +14,9 @@ export default class Trips extends React.Component {
         </div>
         <div className='row'>
           <div className='column-full'>
-            <button className='button-add-trip'>Add New Trip</button>
+            <a href='#newtrip'>
+              <button className='button-add-trip'>Add New Trip</button>
+            </a>
           </div>
         </div>
         <div className='row'>
@@ -25,3 +28,5 @@ export default class Trips extends React.Component {
     );
   }
 }
+
+Trips.contextType = AppContext;

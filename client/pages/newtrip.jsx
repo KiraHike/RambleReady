@@ -1,11 +1,14 @@
 import React from 'react';
+import AppContext from '../lib/app-context';
 
 export default class NewTrip extends React.Component {
   render() {
     return (
       <div className='container new-trip'>
         <div className='form-container'>
-          <button className='button-close'>x</button>
+          <a href='#trips'>
+            <button className='button-close'>x</button>
+          </a>
           <h3>New Trip</h3>
           <form className='form-new-trip'>
             <label htmlFor='date-start' className='text-dark-blue'>Start Date</label>
@@ -23,3 +26,5 @@ export default class NewTrip extends React.Component {
     );
   }
 }
+
+NewTrip.contextType = AppContext;
