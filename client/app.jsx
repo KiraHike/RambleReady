@@ -1,4 +1,5 @@
 import React from 'react';
+import NavBar from './components/navbar';
 
 export default class App extends React.Component {
 
@@ -6,6 +7,7 @@ export default class App extends React.Component {
     return (
       <>
       <h1>Ramble Ready</h1>
+      <NavBar />
       </>
     );
   }
