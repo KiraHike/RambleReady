@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Calistoga', cursive;
+}
+
+header,
+footer {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: auto;
+  background-color: white;
+  color: black;
+  text-align: center;
+}
+
+footer {
+  top: auto;
+  bottom: 0;
+}
+
+.navBar {
+  padding: 0;
+}
+
+.navIcon {
+  font-size: 2.5rem;
+  text-align: center;
+  width: 25%;
+}
