@@ -3,17 +3,23 @@ import React from 'react';
 export default class NewTrip extends React.Component {
   render() {
     return (
-      <div className='form-container'>
-        <button className='button-close'>X</button>
-        <h3>New Trip</h3>
-        <form className='form-new-trip'>
-          <input required type='date' name='date-start' />
-          <input required type='date' name='date-end' />
-          <input required type='text' name='country' />
-          <input required type='number' name='budget' min='1' />
-          <button type='submit' className='button-save'>SAVE</button>
-        </form>
-      </div>
+      <div className='container new-trip'>
+        <div className='form-container'>
+          <button className='button-close'>x</button>
+          <h3>New Trip</h3>
+          <form className='form-new-trip'>
+            <label htmlFor='date-start' className='text-dark-blue'>Start Date</label>
+            <input required type='date' name='date-start' className='border-dark-blue' placeholder='Start Date' />
+            <label htmlFor='date-end' className='text-dark-blue'>End Date</label>
+            <input required type='date' name='date-end' className='border-dark-blue' />
+            <label htmlFor='country' className='text-blue'>Country</label>
+            <input required type='text' name='country' className='border-blue' />
+            <label htmlFor='budget' className='text-light-blue'>Budget</label>
+            <input required type='number' name='budget' min='1' className='border-light-blue' />
+            <button type='submit' className='button-save'>SAVE</button>
+          </form>
+        </div>
+      </div >
     );
   }
 }
