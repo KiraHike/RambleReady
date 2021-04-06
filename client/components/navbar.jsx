@@ -14,7 +14,7 @@ export default class NavBar extends React.Component {
       return <li key={icon} className={icon} />;
     });
 
-    return <ul className='navBar'>{navBar}</ul>;
+    return <ul className='nav-bar'>{navBar}</ul>;
   }
 
   render() {
