@@ -7,9 +7,11 @@ export default class App extends React.Component {
   render() {
     return (
       <>
-      <h1>Ramble Ready</h1>
+      <header><h1>Ramble Ready</h1></header>
+      <div className='container'>
       <Trips />
-      <NavBar />
+      </div>
+      <footer><NavBar /></footer>
       </>
     );
   }
