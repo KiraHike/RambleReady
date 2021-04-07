@@ -5,3 +5,11 @@ set client_min_messages to warning;
 drop schema "public" cascade;
 
 create schema "public";
+
+create table "public"."trips" (
+  "tripId"    serial,
+  "startDate" date,
+  "endDate"   date,
+  "country"   text,
+  "budget"    numeric
+);
