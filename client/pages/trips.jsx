@@ -21,6 +21,10 @@ export default class Trips extends React.Component {
   render() {
     return (
       <div className='container'>
+        <h2>My Trips</h2>
+        <a href='#newtrip'>
+          <button className='button-add-trip'>Add New Trip</button>
+        </a>
         <Accordion array={this.state.trips} />
       </div>
     );

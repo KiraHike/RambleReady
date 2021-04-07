@@ -17,17 +17,21 @@ export default class Accordion extends React.Component {
         const formattedEndDate = formatDate(trip.endDate);
         return (
           <li key={trip.tripId}>
-            <h3 id={trip.tripId}>{trip.country}</h3>
-            <div>
-              <div className='card-date-range'>{formattedStartDate} - {formattedEndDate}</div>
-              <div className='card-budget'>Budget: ${trip.budget}</div>
+            <div className='trip-list-header-container'>
+              <h3 id={trip.tripId} className='trip-list-header'>{trip.country}</h3>
+            </div>
+            <div className='trip-list-details'>
+              <div className='trip-list-date-range'>{formattedStartDate} - {formattedEndDate}</div>
+              <div className='trip-list-budget'>Budget: ${trip.budget}</div>
             </div>
           </li>
         );
       } else {
         return (
           <li key={trip.tripId}>
-            <h3 id={trip.tripId}>{trip.country}</h3>
+            <div className='trip-list-header-container'>
+              <h3 id={trip.tripId} className='trip-list-header'>{trip.country}</h3>
+            </div>
           </li>
         );
       }
