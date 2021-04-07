@@ -35,7 +35,7 @@ export default class App extends React.Component {
       <AppContext.Provider value={contextValue}>
         <>
           <header><h1>Ramble Ready</h1></header>
-          {this.renderPage()};
+          {this.renderPage()}
           <footer><NavBar /></footer>
         </>
       </AppContext.Provider>

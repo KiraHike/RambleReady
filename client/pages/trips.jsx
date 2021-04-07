@@ -1,29 +1,31 @@
 import React from 'react';
 import AppContext from '../lib/app-context';
-import TripCard from '../components/tripcard';
+import Accordion from '../components/accordion';
 
 export default class Trips extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      trips: []
+    };
+  }
+
+  componentDidMount() {
+    fetch('/api/trips')
+      .then(res => res.json())
+      .then(trips => {
+        this.setState({ trips });
+      });
+  }
 
   render() {
     return (
-      <div className='card'>
-        <div className='row'>
-          <div className='column-full'>
-            <h2>My Trips</h2>
-          </div>
-        </div>
-        <div className='row'>
-          <div className='column-full'>
-            <a href='#newtrip'>
-              <button className='button-add-trip'>Add New Trip</button>
-            </a>
-          </div>
-        </div>
-        <div className='row'>
-          <div className='column-full'>
-            <TripCard />
-          </div>
-        </div>
+      <div className='container'>
+        <h2>My Trips</h2>
+        <a href='#newtrip'>
+          <button className='button-add-trip'>Add New Trip</button>
+        </a>
+        <Accordion array={this.state.trips} />
       </div>
     );
   }

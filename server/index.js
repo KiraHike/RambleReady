@@ -17,6 +17,22 @@ const jsonMiddleware = express.json();
 app.use(staticMiddleware);
 app.use(jsonMiddleware);
 
+app.get('/api/trips', (req, res, next) => {
+  const sql = `
+    select "tripId",
+           "startDate",
+           "endDate",
+           "country",
+           "budget"
+    from "trips"
+    `;
+  db.query(sql)
+    .then(result => res.json(result.rows))
+    .catch(err => {
+      next(err);
+    });
+});
+
 app.post('/api/trips', (req, res, next) => {
   const { startDate, endDate, country, budget } = req.body;
   const sql = `
