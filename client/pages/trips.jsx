@@ -6,7 +6,7 @@ export default class Trips extends React.Component {
 
   render() {
     return (
-      <div className='container'>
+      <div className='card'>
         <div className='row'>
           <div className='column-full'>
             <h2>My Trips</h2>
