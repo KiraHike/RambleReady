@@ -19,7 +19,8 @@ app.use(jsonMiddleware);
 
 app.get('/api/trips', (req, res, next) => {
   const sql = `
-    select "startDate",
+    select "tripId",
+           "startDate",
            "endDate",
            "country",
            "budget"
