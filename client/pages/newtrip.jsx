@@ -2,7 +2,42 @@ import React from 'react';
 import AppContext from '../lib/app-context';
 
 export default class NewTrip extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      startDate: '',
+      endDate: '',
+      country: '',
+      budget: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const newTrip = {
+      startDate: this.state.startDate,
+      endDate: this.state.endDate,
+      country: this.state.country,
+      budget: this.state.budget
+    };
+    this.props.onSubmit(newTrip);
+    this.setState({
+      startDate: '',
+      endDate: '',
+      country: '',
+      budget: ''
+    });
+  }
+
   render() {
+
     return (
       <div className='container new-trip'>
         <div className='form-container'>
@@ -10,15 +45,15 @@ export default class NewTrip extends React.Component {
             <button className='button-close'>x</button>
           </a>
           <h3>New Trip</h3>
-          <form className='form-new-trip'>
-            <label htmlFor='date-start' className='text-dark-blue'>Start Date</label>
-            <input required type='date' name='date-start' className='border-dark-blue' placeholder='Start Date' />
-            <label htmlFor='date-end' className='text-dark-blue'>End Date</label>
-            <input required type='date' name='date-end' className='border-dark-blue' />
+          <form className='form-new-trip' onSubmit={this.handleSubmit}>
+            <label htmlFor='startDate' className='text-dark-blue'>Start Date</label>
+            <input required type='date' name='startDate' className='border-dark-blue' onChange={this.handleChange} />
+            <label htmlFor='endDate' className='text-dark-blue'>End Date</label>
+            <input required type='date' name='endDate' className='border-dark-blue' onChange={this.handleChange} />
             <label htmlFor='country' className='text-blue'>Country</label>
-            <input required type='text' name='country' className='border-blue' />
+            <input required type='text' name='country' className='border-blue' onChange={this.handleChange} />
             <label htmlFor='budget' className='text-light-blue'>Budget</label>
-            <input required type='number' name='budget' min='1' className='border-light-blue' />
+            <input required type='number' name='budget' min='1' className='border-light-blue' onChange={this.handleChange} />
             <button type='submit' className='button-save'>SAVE</button>
           </form>
         </div>
