@@ -21,19 +21,26 @@ export default class NewTrip extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const newTrip = {
-      startDate: this.state.startDate,
-      endDate: this.state.endDate,
-      country: this.state.country,
-      budget: this.state.budget
-    };
-    this.props.onSubmit(newTrip);
+    fetch('/api/trips', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    })
+      .then(res => res.json())
+      .then(result => {
+        window.location.hash = '#trips';
+      });
+
     this.setState({
       startDate: '',
       endDate: '',
       country: '',
       budget: ''
     });
+
+    window.location.hash = 'trips';
   }
 
   render() {
