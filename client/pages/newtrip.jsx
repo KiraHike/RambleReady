@@ -48,7 +48,7 @@ export default class NewTrip extends React.Component {
     return (
       <div className='container new-trip'>
         <div className='form-container'>
-          <a href='#trips'>
+          <a className='anchor-right' href='#trips'>
             <button className='button-close'>x</button>
           </a>
           <h3>New Trip</h3>
