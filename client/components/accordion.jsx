@@ -1,4 +1,5 @@
 import React from 'react';
+import formatDate from '../lib/format-date';
 
 export default class Accordion extends React.Component {
   constructor(props) {
@@ -12,11 +13,13 @@ export default class Accordion extends React.Component {
   makeList(array) {
     const trips = array.map(trip => {
       if (trip.tripId === Number(this.state.view)) {
+        const formattedStartDate = formatDate(trip.startDate);
+        const formattedEndDate = formatDate(trip.endDate);
         return (
           <li key={trip.tripId}>
             <h3 id={trip.tripId}>{trip.country}</h3>
             <div>
-              <div className='card-date-range'>{trip.startDate} - {trip.endDate}</div>
+              <div className='card-date-range'>{formattedStartDate} - {formattedEndDate}</div>
               <div className='card-budget'>Budget: ${trip.budget}</div>
             </div>
           </li>
