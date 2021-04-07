@@ -1,6 +1,7 @@
 require('dotenv/config');
 const express = require('express');
 const staticMiddleware = require('./static-middleware');
+const errorMiddleware = require('./error-middleware');
 const pg = require('pg');
 
 const db = new pg.Pool({
@@ -16,7 +17,7 @@ const jsonMiddleware = express.json();
 app.use(staticMiddleware);
 app.use(jsonMiddleware);
 
-app.post('/api/trips', (req, res) => {
+app.post('/api/trips', (req, res, next) => {
   const { startDate, endDate, country, budget } = req.body;
   const sql = `
     insert into "trips" ("startDate", "endDate", "country", "budget")
@@ -30,9 +31,11 @@ app.post('/api/trips', (req, res) => {
       res.status(201).json(trip);
     })
     .catch(err => {
-      console.error(err);
+      next(err);
     });
 });
+
+app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
