@@ -47,7 +47,7 @@ h1,
 .container {
   margin-top: 85px;
   margin-bottom: 75px;
-  min-height: calc(100vh - 160px);
+  min-height: calc(100vh - 182px);
   background-color: #f3f3f3;
 }
 
@@ -113,8 +113,11 @@ h2 {
   background-color: white;
 }
 
-.button-close {
+.anchor-right {
   align-self: flex-end;
+}
+
+.button-close {
   margin: 10px 10px 0 10px;
   text-align: center;
   padding: 3px 8px 4px 8px;
@@ -127,7 +130,8 @@ h2 {
   font-size: 1rem;
 }
 
-.button-close:hover {
+.button-close:hover,
+.button-close.active {
   padding: 0 5px 1px 5px;
   background-color: white;
   border: 3px solid #123d92;
@@ -202,7 +206,8 @@ input:hover {
   font-size: 1rem;
 }
 
-.button-save:hover {
+.button-save:hover,
+.button-save:active {
   background-color: white;
   border: 3px solid #41c32c;
   color: #41c32c;
