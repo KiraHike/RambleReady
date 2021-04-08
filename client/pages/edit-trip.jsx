@@ -37,16 +37,10 @@ export default class EditTrip extends React.Component {
       },
       body: JSON.stringify(this.state)
     })
-      .then(res => res.json());
-
-    this.setState({
-      startDate: new Date().toISOString(),
-      endDate: new Date().toISOString(),
-      country: '',
-      budget: ''
-    });
-
-    window.location.hash = '#trips';
+      .then(res => {
+        res.json();
+        window.location.hash = '#trips';
+      });
   }
 
   render() {
