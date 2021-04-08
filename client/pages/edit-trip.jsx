@@ -13,6 +13,7 @@ export default class EditTrip extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -43,6 +44,10 @@ export default class EditTrip extends React.Component {
       });
   }
 
+  handleDelete(event) {
+    window.location.hash = `#confirmdelete?tripId=${this.props.tripId}`;
+  }
+
   render() {
     const formattedStartDate = formatDateEdit(this.state.startDate);
     const formattedEndDate = formatDateEdit(this.state.endDate);
@@ -63,10 +68,10 @@ export default class EditTrip extends React.Component {
             <label htmlFor='budget' className='text-light-blue'>Budget</label>
             <input required type='number' name='budget' min='1' className='border-light-blue' value={this.state.budget} onChange={this.handleChange} />
             <div className='button-container'>
-              <button className='button-delete'>DELETE</button>
               <button type='submit' className='button-save'>SAVE</button>
             </div>
           </form>
+          <button className='button-delete' onClick={this.handleDelete}>DELETE</button>
         </div>
       </div >
     );
