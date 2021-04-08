@@ -6,6 +6,7 @@ export default class EditTrip extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isDeleting: false,
       startDate: new Date().toISOString(),
       endDate: new Date().toISOString(),
       country: '',
@@ -14,6 +15,7 @@ export default class EditTrip extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   componentDidMount() {
@@ -45,10 +47,14 @@ export default class EditTrip extends React.Component {
   }
 
   handleDelete(event) {
-    window.location.hash = `#confirmdelete?tripId=${this.props.tripId}`;
+    this.setState({ isDeleting: true });
   }
 
-  render() {
+  handleClose(event) {
+    this.setState({ isDeleting: false });
+  }
+
+  renderEditForm() {
     const formattedStartDate = formatDateEdit(this.state.startDate);
     const formattedEndDate = formatDateEdit(this.state.endDate);
     return (
@@ -74,6 +80,33 @@ export default class EditTrip extends React.Component {
           <button className='button-delete' onClick={this.handleDelete}>DELETE</button>
         </div>
       </div >
+    );
+  }
+
+  renderConfirmDelete() {
+    return (
+      <div className='container confirm-delete'>
+          <button className='button-close' onClick={this.handleClose}>x</button>
+        <div>
+          Trip Details
+        </div>
+        <button className='fas fa-check-square' />
+      </div >
+    );
+  }
+
+  render() {
+    let page;
+    if (this.state.isDeleting) {
+      page = this.renderConfirmDelete();
+    } else {
+      page = this.renderEditForm();
+    }
+
+    return (
+      <>
+      {page}
+      </>
     );
   }
 }
