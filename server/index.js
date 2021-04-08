@@ -83,10 +83,7 @@ app.patch('/api/trips/:tripId', (req, res, next) => {
   `;
   const params = [startDate, endDate, country, budget, tripId];
   db.query(sql, params)
-    .then(result => {
-      const [trip] = result.rows[0];
-      res.json(trip);
-    })
+    .then(result => res.json(result.rows[0]))
     .catch(err => {
       next(err);
     });
