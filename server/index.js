@@ -25,9 +25,28 @@ app.get('/api/trips', (req, res, next) => {
            "country",
            "budget"
     from "trips"
+    order by "startDate"
     `;
   db.query(sql)
     .then(result => res.json(result.rows))
+    .catch(err => {
+      next(err);
+    });
+});
+
+app.get('/api/trips/:tripId', (req, res, next) => {
+  const sql = `
+    select "tripId",
+           "startDate",
+           "endDate",
+           "country",
+           "budget"
+    from "trips"
+    where "tripId" = $1
+    `;
+  const params = [req.params.tripId];
+  db.query(sql, params)
+    .then(result => res.json(result.rows[0]))
     .catch(err => {
       next(err);
     });
@@ -46,6 +65,25 @@ app.post('/api/trips', (req, res, next) => {
       const [trip] = res.rows[0];
       res.status(201).json(trip);
     })
+    .catch(err => {
+      next(err);
+    });
+});
+
+app.patch('/api/trips/:tripId', (req, res, next) => {
+  const { tripId, startDate, endDate, country, budget } = req.body;
+  const sql = `
+    update "trips"
+      set "startDate" = $1,
+          "endDate" = $2,
+          "country" = $3,
+          "budget" = $4
+      where "tripId" = $5
+      returning *
+  `;
+  const params = [startDate, endDate, country, budget, tripId];
+  db.query(sql, params)
+    .then(result => res.json(result.rows[0]))
     .catch(err => {
       next(err);
     });
