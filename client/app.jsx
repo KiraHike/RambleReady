@@ -21,13 +21,14 @@ export default class App extends React.Component {
   }
 
   renderPage() {
-    const { path } = this.state.route;
-    if (path === 'trips') {
+    const { route } = this.state;
+    if (route.path === 'trips') {
       return <Trips />;
-    } else if (path === 'newtrip') {
+    } else if (route.path === 'newtrip') {
       return <NewTrip />;
-    } else if (path === 'edittrip') {
-      return <EditTrip />;
+    } else if (route.path === 'edittrip') {
+      const tripId = route.params.get('tripId');
+      return <EditTrip tripId={tripId} />;
     }
   }
 

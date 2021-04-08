@@ -6,9 +6,8 @@ export default class EditTrip extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tripId: '',
-      startDate: '',
-      endDate: '',
+      startDate: new Date().toISOString(),
+      endDate: new Date().toISOString(),
       country: '',
       budget: ''
     };
@@ -17,7 +16,7 @@ export default class EditTrip extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/api/trips/1')
+    fetch(`/api/trips/${this.props.tripId}`)
       .then(res => res.json())
       .then(trip => {
         this.setState(trip);
@@ -31,7 +30,7 @@ export default class EditTrip extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    fetch('/api/trips/1', {
+    fetch(`/api/trips/${this.props.tripId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -41,9 +40,8 @@ export default class EditTrip extends React.Component {
       .then(res => res.json());
 
     this.setState({
-      tripId: '',
-      startDate: '',
-      endDate: '',
+      startDate: new Date().toISOString(),
+      endDate: new Date().toISOString(),
       country: '',
       budget: ''
     });
