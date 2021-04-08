@@ -25,6 +25,7 @@ app.get('/api/trips', (req, res, next) => {
            "country",
            "budget"
     from "trips"
+    order by "startDate"
     `;
   db.query(sql)
     .then(result => res.json(result.rows))
