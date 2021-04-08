@@ -69,6 +69,28 @@ app.post('/api/trips', (req, res, next) => {
     });
 });
 
+app.patch('/api/trips/:tripId', (req, res, next) => {
+  const { tripId, startDate, endDate, country, budget } = req.body;
+  const sql = `
+    update "trips"
+      set "startDate" = $1,
+          "endDate" = $2,
+          "country" = $3,
+          "budget" = $4
+      where "tripId" = $5
+      returning *
+  `;
+  const params = [startDate, endDate, country, budget, tripId];
+  db.query(sql, params)
+    .then(result => {
+      const [trip] = result.rows[0];
+      res.json(trip);
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
