@@ -23,7 +23,9 @@ export default class Accordion extends React.Component {
             <div className='trip-list-details'>
               <div className='trip-list-date-range'>{formattedStartDate} - {formattedEndDate}</div>
               <div className='trip-list-budget'>Budget: ${trip.budget}</div>
-              <p className='trip-list-edit-text'>EDIT</p>
+              <a href={`#edittrip?tripId=${trip.tripId}`} className='button-edit-trip'>
+                <p className='trip-list-edit-text'>EDIT</p>
+              </a>
             </div>
           </li>
         );
@@ -46,8 +48,6 @@ export default class Accordion extends React.Component {
       event.target.id === this.state.view
         ? this.setState({ view: 0 })
         : this.setState({ view: event.target.id });
-    } else if (event.target.matches('p')) {
-      window.location.hash = '#edittrip';
     }
   }
 
