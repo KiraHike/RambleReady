@@ -4,6 +4,7 @@ import parseRoute from './lib/parse-route';
 import NavBar from './components/navbar';
 import Trips from './pages/trips';
 import NewTrip from './pages/newtrip';
+import EditTrip from './pages/edit-trip';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -25,6 +26,8 @@ export default class App extends React.Component {
       return <Trips />;
     } else if (path === 'newtrip') {
       return <NewTrip />;
+    } else if (path === 'edittrip') {
+      return <EditTrip />;
     }
   }
 
