@@ -61,8 +61,8 @@ app.post('/api/trips', (req, res, next) => {
     `;
   const params = [startDate, endDate, country, budget];
   db.query(sql, params)
-    .then(res => {
-      const [trip] = res.rows[0];
+    .then(result => {
+      const [trip] = result.rows;
       res.status(201).json(trip);
     })
     .catch(err => {
@@ -93,6 +93,7 @@ app.delete('/api/trips/:tripId', (req, res, next) => {
   const sql = `
     delete from "trips"
       where "tripId" = $1
+      returning *
   `;
   const params = [req.params.tripId];
   db.query(sql, params)
