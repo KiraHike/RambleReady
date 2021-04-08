@@ -28,19 +28,10 @@ export default class NewTrip extends React.Component {
       },
       body: JSON.stringify(this.state)
     })
-      .then(res => res.json())
-      .then(result => {
+      .then(res => {
+        res.json();
         window.location.hash = '#trips';
       });
-
-    this.setState({
-      startDate: '',
-      endDate: '',
-      country: '',
-      budget: ''
-    });
-
-    window.location.hash = 'trips';
   }
 
   render() {
