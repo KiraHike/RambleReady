@@ -33,6 +33,24 @@ app.get('/api/trips', (req, res, next) => {
     });
 });
 
+app.get('/api/trips/:tripId', (req, res, next) => {
+  const sql = `
+    select "tripId",
+           "startDate",
+           "endDate",
+           "country",
+           "budget"
+    from "trips"
+    where "tripId" = $1
+    `;
+  const params = [req.params.tripId];
+  db.query(sql, params)
+    .then(result => res.json(result.rows[0]))
+    .catch(err => {
+      next(err);
+    });
+});
+
 app.post('/api/trips', (req, res, next) => {
   const { startDate, endDate, country, budget } = req.body;
   const sql = `
