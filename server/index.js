@@ -89,6 +89,19 @@ app.patch('/api/trips/:tripId', (req, res, next) => {
     });
 });
 
+app.delete('/api/trips/:tripId', (req, res, next) => {
+  const sql = `
+    delete from "trips"
+      where "tripId" = $1
+  `;
+  const params = [req.params.tripId];
+  db.query(sql, params)
+    .then(result => res.json(result.rows[0]))
+    .catch(err => {
+      next(err);
+    });
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
