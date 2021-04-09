@@ -84,6 +84,94 @@ h2 {
   padding: 25px;
 }
 
+.country-select {
+  height: 80px;
+  width: 300px;
+  padding: 25px;
+  border: none;
+  background-color: #f3f3f3;
+  color: #123d92;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.icon-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 300px;
+}
+
+.icon {
+  height: 80px;
+  width: 80px;
+  border: none;
+  border-radius: 8px;
+  background-color: white;
+  cursor: pointer;
+  font-size: 3rem;
+  margin: 10px;
+}
+
+.icon.food {
+  color: #41c32c;
+}
+
+.icon.local-transportation {
+  color: #123d92;
+}
+
+.icon.shopping {
+  color: #f22222;
+}
+
+.icon.entertainment {
+  color: #8a0cc6;
+}
+
+.icon.lodging {
+  color: #f87e0e;
+}
+
+.icon.international-transportation {
+  color: #0aacf1;
+}
+
+.icon.administrative {
+  color: #0a67f1;
+}
+
+.icon.medical {
+  color: #d1288e;
+}
+
+.icon.misc {
+  color: #f4dd0b;
+}
+
+.converter-label {
+  padding: 0;
+}
+
+.converter-input {
+  height: 80px;
+  width: 180px;
+  margin: 20px 10px 10px 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.converter-result {
+  height: 100px;
+  width: 100px;
+
+  /* margin: 20px 10px 10px 10px; */
+  border: none;
+  border-radius: 50%;
+  background-color: white;
+}
+
 .button-add-trip {
   height: 60px;
   width: 300px;
