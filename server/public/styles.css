@@ -59,7 +59,8 @@ ul {
   background-color: #f3f3f3;
 }
 
-.container.new-trip {
+.container.new-trip,
+.container.confirm-delete {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -170,7 +171,6 @@ p {
 
 .button-close {
   margin: 10px 10px 0 10px;
-  text-align: center;
   padding: 3px 8px 4px 8px;
   border: none;
   border-radius: 2px;
@@ -232,6 +232,7 @@ input:hover {
 
 .border-light-blue {
   border-color: #0aacf1;
+  margin-bottom: 20px;
 }
 
 .text-dark-blue {
@@ -261,6 +262,7 @@ input:hover {
   border-radius: 8px;
   color: white;
   font-size: 1rem;
+  margin: 0 38px;
 }
 
 .button-save {
@@ -277,6 +279,8 @@ input:hover {
 
 .button-delete {
   background-color: #f22222;
+  position: relative;
+  bottom: 39px;
 }
 
 .button-delete:hover,
@@ -285,4 +289,50 @@ input:hover {
   border: 3px solid #f22222;
   color: #f22222;
   cursor: pointer;
+}
+
+.confirm-delete-box {
+  height: 220px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border: none;
+  border-radius: 8px;
+}
+
+.right {
+  align-self: flex-end;
+}
+
+.trip-delete-container {
+  width: 80%;
+  margin: 5px 0;
+  border: 2px solid #f3f3f3;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h4.trip-delete-country {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+p.trip-delete-date,
+p.trip-delete-budget {
+  font-family: 'open-sans', sans-serif;
+}
+
+p.trip-delete-budget {
+  font-weight: 700;
+}
+
+.button-confirm {
+  border: none;
+  background-color: white;
+  font-size: 2rem;
+  color: #41c32c;
 }
