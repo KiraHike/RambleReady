@@ -1,6 +1,5 @@
 import React from 'react';
 import AppContext from '../lib/app-context';
-// require('dotenv/config');
 
 export default class NewExpense extends React.Component {
   constructor(props) {
@@ -46,13 +45,12 @@ export default class NewExpense extends React.Component {
           <button className='fas fa-asterisk icon misc' />
         </div>
         <div className='converter-container'>
-          <form>
-            <label htmlFor='currency' className='converter-label' />
+          <form className='converter-form'>
             <input required type='number' name='currency' className='converter-input' placeholder={this.state.currency} />
             <button type='submit' className='fas fa-calculator icon calculator' onClick={this.convertCurrency} />
           </form>
         </div>
-        <div className='converter-result'>USD</div>
+        <div className='converter-result'></div>
       </div>
     );
   }
