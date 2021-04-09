@@ -13,10 +13,14 @@ export default class NewExpense extends React.Component {
   }
 
   render() {
-
     return (
-      <>
-      </>
+      <div className='container'>
+      <form>
+        <label htmlFor='currency' />
+        <input required type='number' name='currency' placeholder={this.state.currency} />
+        <button type='submit' className='fas fa-calculator' />
+      </form>
+      </div>
     );
   }
 }
