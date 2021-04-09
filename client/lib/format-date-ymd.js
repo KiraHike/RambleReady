@@ -1,6 +1,6 @@
 const parseISO = require('date-fns/parseISO');
 
-function formatDateEdit(iso) {
+function formatYearMonthDay(iso) {
   const parsedDate = parseISO(iso);
   let month = parsedDate.getMonth() + 1;
   if (month.toString().length === 1) {
@@ -16,4 +16,4 @@ function formatDateEdit(iso) {
   return formattedDate;
 }
 
-export default formatDateEdit;
+export default formatYearMonthDay;
