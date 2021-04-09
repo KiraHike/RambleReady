@@ -5,6 +5,7 @@ import NavBar from './components/navbar';
 import Trips from './pages/trips';
 import NewTrip from './pages/newtrip';
 import EditTrip from './pages/edit-trip';
+import NewExpense from './pages/new-expense';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -29,6 +30,8 @@ export default class App extends React.Component {
     } else if (route.path === 'edittrip') {
       const tripId = route.params.get('tripId');
       return <EditTrip tripId={tripId} />;
+    } else if (route.path === 'newexpense') {
+      return <NewExpense />;
     }
   }
 
