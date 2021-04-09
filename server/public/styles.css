@@ -52,7 +52,7 @@ ul {
 .container {
   margin-top: 85px;
   margin-bottom: 75px;
-  min-height: calc(100vh - 182px);
+  min-height: calc(100vh - 160px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,7 +86,8 @@ h2 {
 
 .country-select {
   height: 80px;
-  width: 300px;
+  min-width: fit-content;
+  max-width: 300px;
   padding: 25px;
   border: none;
   background-color: #f3f3f3;
@@ -96,6 +97,7 @@ h2 {
 }
 
 .icon-container {
+  margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -149,6 +151,12 @@ h2 {
   color: #f4dd0b;
 }
 
+.converter-form {
+  display: flex;
+  align-content: baseline;
+  margin: 50px 0 20px 0;
+}
+
 .converter-label {
   padding: 0;
 }
@@ -156,20 +164,21 @@ h2 {
 .converter-input {
   height: 80px;
   width: 180px;
-  margin: 20px 10px 10px 10px;
+  margin: 0 10px;
   border: none;
   border-radius: 8px;
   background-color: white;
+  font-size: 1.5rem;
+}
+
+.icon.calculator {
+  margin: 0 10px;
 }
 
 .converter-result {
-  height: 100px;
-  width: 100px;
-
-  /* margin: 20px 10px 10px 10px; */
-  border: none;
-  border-radius: 50%;
-  background-color: white;
+  margin: 20px 10px 10px 10px;
+  color: #123d92;
+  font-size: 1.5rem;
 }
 
 .button-add-trip {
