@@ -76,17 +76,17 @@ export default class EditTrip extends React.Component {
       const endDateMonthDayYear = dateMonthDayYear(this.state.endDate);
       return (
         <div className='container confirm-delete'>
-          <button className='button-close' onClick={this.handleClose}>x</button>
-          <div>
+          <div className='confirm-delete-box'>
+            <button className='button-close right' onClick={this.handleClose}>x</button>
             <h3>Delete Trip?</h3>
             <div className='trip-delete-container'>
               <h4 className='trip-delete-country'>{this.state.country}</h4>
               <p className='trip-delete-date'>{startDateMonthDayYear} - {endDateMonthDayYear}</p>
               <p className='trip-delete-budget'>Budget: ${this.state.budget}</p>
             </div>
+            <button className='fas fa-check-square button-confirm' onClick={this.handleConfirmDelete} />
         </div>
-          <button className='fas fa-check-square button-confirm' onClick={this.handleConfirmDelete} />
-        </div >
+      </div >
       );
     } else {
       const startDateYearMonthDay = dateYearMonthDay(this.state.startDate);
@@ -107,9 +107,7 @@ export default class EditTrip extends React.Component {
               <input required type='text' name='country' className='border-blue' value={this.state.country} onChange={this.handleChange} />
               <label htmlFor='budget' className='text-light-blue'>Budget</label>
               <input required type='number' name='budget' min='1' className='border-light-blue' value={this.state.budget} onChange={this.handleChange} />
-              <div className='button-container'>
-                <button type='submit' className='button-save'>SAVE</button>
-              </div>
+                <button type='submit' className='button-save right'>SAVE</button>
             </form>
             <button className='button-delete' onClick={this.handleDelete}>DELETE</button>
           </div>
