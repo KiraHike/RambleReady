@@ -3,24 +3,28 @@ import React from 'react';
 export default class NewExpenseDetail extends React.Component {
   constructor(props) {
     super(props);
-    this.makeSubcategories = this.makeSubcategories.bind(this);
+    this.makeOptions = this.makeOptions.bind(this);
   }
 
-  makeSubcategories(array) {
-    const expenseSubcategories = array.map(subcategory => {
+  makeOptions(array) {
+    if (!array) {
+      return <select disabled className='subcategory-select' />;
+    } else {
+      const optionsList = array.map(option => {
+        return (
+          <option key={option}>{option}</option>
+        );
+      });
       return (
-        <li key={subcategory}>
-          <input type='radio' name='subcategory' />
-          <label htmlFor='subcategory'>{subcategory}</label>
-        </li>
+        <select className='subcategory-select'>
+          {optionsList}
+        </select>
       );
-    });
-
-    return <ul className='subcategory-list'>{expenseSubcategories}</ul>;
+    }
   }
 
   render() {
-    const subcategories = this.makeSubcategories(this.props.subcategoryArray);
+    const subcategoryOptions = this.makeOptions(this.props.subcategoryArray);
     return (
       <>
       <div className='container'>
@@ -31,13 +35,13 @@ export default class NewExpenseDetail extends React.Component {
           <h3>{this.props.category}</h3>
           <form className='form-new-expense'>
             <label htmlFor='amount' />
-            <input required type='number' name='amount' className='border-light-blue' placeholder={this.props.currency} />
-            {subcategories}
+            <input required type='number' name='amount' className='subcategory-amount' placeholder='Amount' />
+            {subcategoryOptions}
             <label htmlFor='notes' />
-            <input type='textarea' name='notes' className='border-dark-blue' placeholder='Notes (Optional)' />
+            <input type='textarea' name='notes' className='expense-notes' placeholder='Notes (Optional)' />
             <label htmlFor='expenseDate' />
-            <input required type='date' name='expenseDate' className='border-light-blue' />
-            <button type='submit' className='fas fa-plus' />
+            <input required type='date' name='expenseDate' className='expense-date' />
+            <button type='submit' className='button-add-expense'>SAVE</button>
           </form>
         </div>
       </div>
