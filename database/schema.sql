@@ -11,5 +11,23 @@ create table "public"."trips" (
   "startDate" date,
   "endDate"   date,
   "country"   text,
-  "budget"    numeric
+  "budget"    numeric,
+  PRIMARY KEY("tripId")
+);
+
+create table "public"."expenses" (
+  "tripId"    integer,
+  "expenseId" serial,
+  "date"      date,
+  "category"  text,
+  "subcategory" text,
+  "notes"     text,
+  "currency"  text,
+  "exchangeRate"  numeric,
+  "amountUSD"     numeric,
+  PRIMARY KEY("expenseId"),
+  CONSTRAINT fk_trip
+    FOREIGN KEY("tripId")
+      REFERENCES trips("tripId")
+        ON DELETE CASCADE
 );
