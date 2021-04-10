@@ -1,4 +1,5 @@
 import React from 'react';
+import ToggleSwitch from './toggle-switch';
 
 export default class NewExpenseDetail extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ export default class NewExpenseDetail extends React.Component {
     return (
       <>
       <div className='container'>
-        <div className='form-container'>
+        <div className='expense-form-container'>
           <a className='anchor-right' href='#newexpense'>
             <button className='button-close'>x</button>
           </a>
@@ -37,6 +38,11 @@ export default class NewExpenseDetail extends React.Component {
             <label htmlFor='amount' />
             <input required type='number' name='amount' className='subcategory-amount' placeholder='Amount' />
             {subcategoryOptions}
+            <div className='toggle-container'>
+              <p className='toggle-currency'>EUR</p>
+              <ToggleSwitch />
+              <p className='toggle-currency'>USD</p>
+            </div>
             <label htmlFor='notes' />
             <input type='textarea' name='notes' className='expense-notes' placeholder='Notes (Optional)' />
             <label htmlFor='expenseDate' />
