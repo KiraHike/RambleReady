@@ -1,6 +1,18 @@
 import React from 'react';
 import AppContext from '../lib/app-context';
 
+const expenseCategories = {
+  foodAndDrink: ['Breakfast', 'Lunch', 'Dinner', 'Coffee', 'Drinks', 'Other'],
+  localTransportation: ['Car Rental', 'Fuel', 'Taxi', 'Train', 'Public', 'Other'],
+  shopping: ['Souvenirs', 'Gifts', 'Supplies', 'Other'],
+  entertainment: ['Attractions', 'Tours', 'Excursions', 'Events', 'Other'],
+  lodging: ['Vacation Rental', 'Hotel', 'Hostel', 'Campsite', 'Other'],
+  internationalTransportation: ['Round Trip Airfare', 'One Way Airfare', 'Train', 'Bus', 'Other'],
+  administrative: ['Travel Insurance', 'Passports', 'Visas', 'Pet Boarding', 'Other'],
+  medical: ['Immunizations', 'Prescriptions', 'Medical Insurance', 'Pharmacy', 'Medical Care', 'Other'],
+  miscellaneous: null
+};
+
 export default class NewExpense extends React.Component {
   constructor(props) {
     super(props);
