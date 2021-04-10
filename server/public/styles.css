@@ -181,6 +181,50 @@ h2 {
   font-size: 1.5rem;
 }
 
+.form-new-expense {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.subcategory-amount,
+.subcategory-select {
+  height: 3rem;
+  width: 38%;
+  background-color: white;
+  border: 3px solid #123d92;
+  border-radius: 8px;
+}
+
+.subcategory-select {
+  margin-left: 10px;
+  padding: 4px;
+}
+
+.expense-notes {
+  font-family: 'open-sans', sans-serif;
+  height: 5rem;
+  border-color: #0a67f1;
+}
+
+.expense-date {
+  width: 56%;
+  background-color: white;
+  border-color: #0aacf1;
+}
+
+.button-add-expense {
+  width: 60px;
+  height: 2.9rem;
+  margin-left: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #41c32c;
+  color: white;
+  font-size: 1rem;
+}
+
 .button-add-trip {
   height: 60px;
   width: 300px;
@@ -300,7 +344,7 @@ h3 {
   align-items: center;
 }
 
-label {
+.new-trip-label {
   align-self: flex-start;
   padding-left: 12%;
 }
