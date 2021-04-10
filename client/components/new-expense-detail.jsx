@@ -9,9 +9,9 @@ export default class NewExpenseDetail extends React.Component {
   makeSubcategories(array) {
     const expenseSubcategories = array.map(subcategory => {
       return (
-        <li key={this.props.subcategory}>
+        <li key={subcategory}>
           <input type='radio' name='subcategory' />
-          <label htmlFor='subcategory'>{this.props.subcategory}</label>
+          <label htmlFor='subcategory'>{subcategory}</label>
         </li>
       );
     });
@@ -20,7 +20,7 @@ export default class NewExpenseDetail extends React.Component {
   }
 
   render() {
-    const subcategories = this.makeSubcategories(this.props.array);
+    const subcategories = this.makeSubcategories(this.props.subcategoryArray);
     return (
       <>
       <div className='container'>
