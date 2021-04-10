@@ -1,5 +1,6 @@
 import React from 'react';
 import AppContext from '../lib/app-context';
+import NewExpenseDetail from '../components/new-expense-detail';
 
 const expenseCategories = {
   foodAndDrink: ['Breakfast', 'Lunch', 'Dinner', 'Coffee', 'Drinks', 'Other'],
@@ -19,9 +20,17 @@ export default class NewExpense extends React.Component {
     this.state = {
       date: '',
       currency: 'EUR',
-      exchange: 0
+      exchange: 0,
+      view: null
     };
+    this.handleClick = this.handleClick.bind(this);
     this.convertCurrency = this.convertCurrency.bind(this);
+  }
+
+  handleClick(event) {
+    if (event.target.matches('button')) {
+      this.setState({ view: event.target.id });
+    }
   }
 
   convertCurrency(event) {
@@ -38,6 +47,11 @@ export default class NewExpense extends React.Component {
   }
 
   render() {
+    if (this.state.view) {
+      return (
+        <NewExpenseDetail category={this.state.view} subcategoryArray={expenseCategories[this.state.view]} />
+      );
+    }
     return (
       <div className='container'>
         <form>
@@ -45,16 +59,16 @@ export default class NewExpense extends React.Component {
             <option>Country</option>
           </select>
         </form>
-        <div className='icon-container'>
-          <button className='fas fa-utensils icon food' />
-          <button className='fas fa-bus icon local-transportation' />
-          <button className='fas fa-gift icon shopping' />
-          <button className='fas fa-theater-masks icon entertainment' />
-          <button className='fas fa-bed icon lodging' />
-          <button className='fas fa-plane-departure icon international-transportation' />
-          <button className='fas fa-globe icon administrative' />
-          <button className='fas fa-heartbeat icon medical' />
-          <button className='fas fa-asterisk icon misc' />
+        <div className='icon-container' onClick={this.handleClick}>
+          <button id='foodAndDrink' className='fas fa-utensils icon food' />
+          <button id='localTransportation' className='fas fa-bus icon local-transportation' />
+          <button id='shopping' className='fas fa-gift icon shopping' />
+          <button id='entertainment' className='fas fa-theater-masks icon entertainment' />
+          <button id='lodging' className='fas fa-bed icon lodging' />
+          <button id='internationalTransportation' className='fas fa-plane-departure icon international-transportation' />
+          <button id='administrative' className='fas fa-globe icon administrative' />
+          <button id='medical' className='fas fa-heartbeat icon medical' />
+          <button id='miscellaneous' className='fas fa-asterisk icon misc' />
         </div>
         <div className='converter-container'>
           <form className='converter-form'>
