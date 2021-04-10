@@ -7,10 +7,10 @@ const expenseCategories = {
   localTransportation: ['Car Rental', 'Fuel', 'Taxi', 'Train', 'Public', 'Other'],
   shopping: ['Souvenirs', 'Gifts', 'Supplies', 'Other'],
   entertainment: ['Attractions', 'Tours', 'Excursions', 'Events', 'Other'],
-  lodging: ['Vacation Rental', 'Hotel', 'Hostel', 'Campsite', 'Other'],
-  internationalTransportation: ['Round Trip Airfare', 'One Way Airfare', 'Train', 'Bus', 'Other'],
-  administrative: ['Travel Insurance', 'Passports', 'Visas', 'Pet Boarding', 'Other'],
-  medical: ['Immunizations', 'Prescriptions', 'Medical Insurance', 'Pharmacy', 'Medical Care', 'Other'],
+  lodging: ['Hotel', 'Vacation Rental', 'Hostel', 'Campsite', 'Other'],
+  internationalTransportation: ['Airfare', 'Train', 'Bus', 'Other'],
+  administrative: ['Passports', 'Visas', 'Travel Insurance', 'Pet Boarding', 'Other'],
+  medical: ['Pharmacy', 'Immunizations', 'Medical Insurance', 'Medical Care', 'Other'],
   miscellaneous: null
 };
 
