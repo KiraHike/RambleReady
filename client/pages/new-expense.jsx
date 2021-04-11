@@ -3,34 +3,77 @@ import AppContext from '../lib/app-context';
 import NewExpenseDetail from '../components/new-expense-detail';
 
 const expenseCategories = {
-  foodAndDrink: ['Breakfast', 'Lunch', 'Dinner', 'Coffee', 'Drinks', 'Other'],
-  localTransportation: ['Car Rental', 'Fuel', 'Taxi', 'Train', 'Public', 'Other'],
-  shopping: ['Souvenirs', 'Gifts', 'Supplies', 'Other'],
-  entertainment: ['Attractions', 'Tours', 'Excursions', 'Events', 'Other'],
-  lodging: ['Hotel', 'Vacation Rental', 'Hostel', 'Campsite', 'Other'],
-  internationalTransportation: ['Airfare', 'Train', 'Bus', 'Other'],
-  administrative: ['Passports', 'Visas', 'Travel Insurance', 'Pet Boarding', 'Other'],
-  medical: ['Pharmacy', 'Immunizations', 'Medical Insurance', 'Medical Care', 'Other'],
-  miscellaneous: null
+  foodAndDrink: {
+    category: 'Food & Drink',
+    subcategories: ['Breakfast', 'Lunch', 'Dinner', 'Coffee', 'Drinks', 'Other']
+  },
+  localTransportation: {
+    category: 'Local Transport',
+    subcategories: ['Car Rental', 'Fuel', 'Taxi', 'Train', 'Public', 'Other']
+  },
+  shopping: {
+    category: 'Shopping',
+    subcategories: ['Souvenirs', 'Gifts', 'Supplies', 'Other']
+  },
+  entertainment: {
+    category: 'Entertainment',
+    subcategories: ['Attractions', 'Tours', 'Excursions', 'Events', 'Other']
+  },
+  lodging: {
+    category: 'Lodging',
+    subcategories: ['Hotel', 'Vacation Rental', 'Hostel', 'Campsite', 'Other']
+  },
+  internationalTransportation: {
+    category: 'International Transport',
+    subcategories: ['Airfare', 'Train', 'Bus', 'Other']
+  },
+  administrative: {
+    category: 'Administrative',
+    subcategories: ['Passports', 'Visas', 'Travel Insurance', 'Pet Boarding', 'Other']
+  },
+  medical: {
+    category: 'Medical',
+    subcategories: ['Pharmacy', 'Immunizations', 'Medical Insurance', 'Medical Care', 'Other']
+  },
+  miscellaneous: {
+    category: 'Miscellaneous',
+    subcategories: null
+  }
 };
 
 export default class NewExpense extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: '',
       currency: 'EUR',
       exchange: 0,
+      amount: null,
+      subcategory: null,
+      notes: null,
+      date: null,
       view: null
     };
+    this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleClose = this.handleClose.bind(this);
     this.convertCurrency = this.convertCurrency.bind(this);
+  }
+
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   }
 
   handleClick(event) {
     if (event.target.matches('button')) {
+      window.location.hash = `#newexpense?currency=${this.state.currency}`;
       this.setState({ view: event.target.id });
     }
+  }
+
+  handleClose(event) {
+    window.location.hash = '#newexpense';
+    this.setState({ view: null });
   }
 
   convertCurrency(event) {
@@ -48,8 +91,15 @@ export default class NewExpense extends React.Component {
 
   render() {
     if (this.state.view) {
+      const type = this.state.view;
       return (
-        <NewExpenseDetail category={this.state.view} subcategoryArray={expenseCategories[this.state.view]} />
+        <div className='container new-expense'>
+          <div className='expense-form-container'>
+            <button className='button-close right' onClick={this.handleClose}>x</button>
+            <h3>{expenseCategories[type].category}</h3>
+            <NewExpenseDetail category={expenseCategories[type].category} subcategoryArray={expenseCategories[type].subcategories} />
+          </div>
+        </div>
       );
     }
     return (

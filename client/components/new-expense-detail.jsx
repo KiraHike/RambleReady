@@ -27,31 +27,21 @@ export default class NewExpenseDetail extends React.Component {
   render() {
     const subcategoryOptions = this.makeOptions(this.props.subcategoryArray);
     return (
-      <>
-      <div className='container'>
-        <div className='expense-form-container'>
-          <a className='anchor-right' href='#newexpense'>
-            <button className='button-close'>x</button>
-          </a>
-          <h3>{this.props.category}</h3>
-          <form className='form-new-expense'>
-            <label htmlFor='amount' />
-            <input required type='number' name='amount' className='subcategory-amount' placeholder='Amount' />
-            {subcategoryOptions}
-            <div className='toggle-container'>
-              <p className='toggle-currency'>EUR</p>
-              <ToggleSwitch />
-              <p className='toggle-currency'>USD</p>
-            </div>
-            <label htmlFor='notes' />
-            <input type='textarea' name='notes' className='expense-notes' placeholder='Notes (Optional)' />
-            <label htmlFor='expenseDate' />
-            <input required type='date' name='expenseDate' className='expense-date' />
-            <button type='submit' className='button-add-expense'>SAVE</button>
-          </form>
+      <form className='form-new-expense'>
+        <label htmlFor='amount' />
+        <input required type='number' name='amount' className='subcategory-amount' placeholder='Amount' />
+        {subcategoryOptions}
+        <div className='toggle-container'>
+          <p className='toggle-currency'>{this.props.currency}</p>
+          <ToggleSwitch />
+          <p className='toggle-currency'>USD</p>
         </div>
-      </div>
-      </>
+        <label htmlFor='notes' />
+        <input type='textarea' name='notes' className='expense-notes' placeholder='Notes (Optional)' />
+        <label htmlFor='expenseDate' />
+        <input required type='date' name='expenseDate' className='expense-date' />
+        <button type='submit' className='button-add-expense'>SAVE</button>
+      </form>
     );
   }
 }
