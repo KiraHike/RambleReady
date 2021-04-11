@@ -1,6 +1,7 @@
 import React from 'react';
 import AppContext from '../lib/app-context';
 import NewExpenseDetail from '../components/new-expense-detail';
+import calculate from '../lib/calculateUSD';
 
 const expenseCategories = {
   foodAndDrink: {
@@ -46,7 +47,8 @@ export default class NewExpense extends React.Component {
     super(props);
     this.state = {
       currency: 'EUR',
-      exchange: 0,
+      convert: null,
+      usd: null,
       amount: null,
       subcategory: null,
       notes: null,
@@ -82,11 +84,12 @@ export default class NewExpense extends React.Component {
         return result.json();
       })
       .then(data => {
-        this.setState({ exchange: data.conversion_rate });
+        this.setState({ usd: calculate(this.state.convert, data.conversion_rate) });
       })
       .catch(err => {
         console.error(err);
       });
+
   }
 
   render() {
@@ -102,6 +105,11 @@ export default class NewExpense extends React.Component {
         </div>
       );
     }
+    let converterResult;
+    (this.state.usd)
+      ? converterResult = `$${this.state.usd}`
+      : converterResult = '';
+
     return (
       <div className='container'>
         <form>
@@ -122,11 +130,11 @@ export default class NewExpense extends React.Component {
         </div>
         <div className='converter-container'>
           <form className='converter-form'>
-            <input required type='number' name='currency' className='converter-input' placeholder={this.state.currency} />
+            <input required type='number' name='convert' className='converter-input' placeholder={this.state.currency} onChange={this.handleChange} />
             <button type='submit' className='fas fa-calculator icon calculator' onClick={this.convertCurrency} />
           </form>
         </div>
-        <div className='converter-result'></div>
+        <div className='converter-result'>{converterResult}</div>
       </div>
     );
   }
