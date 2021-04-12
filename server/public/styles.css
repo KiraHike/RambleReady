@@ -345,6 +345,7 @@ h2 {
   font-size: 1.3rem;
   font-weight: 300;
   margin: 0;
+  cursor: pointer;
 }
 
 .trip-list-details {
@@ -443,6 +444,12 @@ h3 {
   font-size: 1rem;
   padding: 5px;
   background-color: white;
+}
+
+.new-trip-input.disabled {
+  background-color: #f3f3f3;
+  color: black;
+  cursor: no-drop;
 }
 
 input:hover {
