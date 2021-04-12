@@ -121,6 +121,18 @@ app.post('/api/expenses', (req, res, next) => {
     });
 });
 
+app.get('/api/countries', (req, res, next) => {
+  const sql = `
+    select "country"
+    from "countries"
+    `;
+  db.query(sql)
+    .then(result => res.json(result.rows))
+    .catch(err => {
+      next(err);
+    });
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
