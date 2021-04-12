@@ -85,6 +85,15 @@ h2 {
   padding: 25px;
 }
 
+.trip-select {
+  background-color: #f3f3f3;
+  color: #123d92;
+  font-size: 1.5rem;
+  border: none;
+  margin: 0;
+  margin: 25px;
+}
+
 .country-select {
   height: 80px;
   min-width: fit-content;
