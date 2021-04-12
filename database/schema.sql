@@ -31,3 +31,9 @@ create table "public"."expenses" (
       REFERENCES trips("tripId")
         ON DELETE CASCADE
 );
+
+create table "public"."countries" (
+  "countryId" serial,
+  "country"   text,
+  "currency"  text
+)
