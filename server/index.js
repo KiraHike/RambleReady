@@ -106,13 +106,13 @@ app.delete('/api/trips/:tripId', (req, res, next) => {
 });
 
 app.post('/api/expenses', (req, res, next) => {
-  const { tripId, date, category, subcategory, notes, currency, exchangeRate, amountUSD } = req.body;
+  const { tripId, date, category, subcategory, notes, amount } = req.body;
   const sql = `
-    insert into "expenses" ("tripId", "date", "category", "subcategory", "notes", "currency", "exchangeRate", "amountUSD")
-    values ($1, $2, $3, $4, $5, $6, $7, $8)
+    insert into "expenses" ("tripId", "date", "category", "subcategory", "notes", "amount")
+    values ($1, $2, $3, $4, $5, $6)
     returning *
     `;
-  const params = [tripId, date, category, subcategory, notes, currency, exchangeRate, amountUSD];
+  const params = [tripId, date, category, subcategory, notes, amount];
   db.query(sql, params)
     .then(result => {
       const [expense] = result.rows;
