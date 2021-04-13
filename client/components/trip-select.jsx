@@ -17,11 +17,12 @@ export default class TripSelect extends React.Component {
 
     const optionsList = array.map(option => {
       return (
-        <option key={option.tripId}>{option.country}</option>
+        <option value={option.tripId} key={option.tripId}>{option.country}</option>
       );
     });
     return (
-      <select value={this.props.value} onChange={this.props.onChange} name='country' className='trip-select'>
+      <select value={this.props.value} onChange={this.props.onChange} name='tripId' className='trip-select'>
+        <option>SELECT TRIP</option>
         {optionsList}
       </select>
     );
