@@ -49,16 +49,19 @@ export default class NewExpense extends React.Component {
     this.state = {
       trips: [],
       tripId: null,
-      date: null,
-      category: null,
-      subcategory: null,
-      notes: null,
       currency: null,
+
       exchangeRate: null,
-      amount: null,
-      usd: null,
+      amountForeign: null,
+      amountUSD: null,
 
       view: null
+
+      // date: null,
+      // category: null,
+      // subcategory: null,
+      // notes: null,
+      // amount: null
     };
     this.handleSelect = this.handleSelect.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -92,7 +95,7 @@ export default class NewExpense extends React.Component {
 
   handleClick(event) {
     if (event.target.matches('button')) {
-      window.location.hash = `#newexpense?tripId=${this.state.tripId}`;
+      window.location.hash = `#newexpense?tripId=${this.state.tripId}?currency=${this.state.currency}`;
       this.setState({ view: event.target.id });
     }
   }
@@ -103,17 +106,25 @@ export default class NewExpense extends React.Component {
   }
 
   convertCurrency(event) {
+    event.preventDefault();
+    const { currency, tripId, exchangeRate } = this.state;
+    if (this.state.exchangeRate) {
+      const amountUSD = calculate(this.state.amountForeign, exchangeRate);
+      this.setState({ amountUSD, currency, tripId, exchangeRate });
+    }
+
     fetch(`https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/pair/${this.state.currency}/USD`)
       .then(result => {
         return result.json();
       })
       .then(data => {
-        this.setState({ exchangeRate });
+        const exchangeRate = data.conversion_rate;
+        const amountUSD = calculate(this.state.amountForeign, exchangeRate);
+        this.setState({ exchangeRate, amountUSD, currency, tripId });
       })
       .catch(err => {
         console.error(err);
       });
-
   }
 
   handleSubmit(event) {
@@ -173,8 +184,8 @@ export default class NewExpense extends React.Component {
     }
 
     let converterResult;
-    (this.state.usd)
-      ? converterResult = `$${this.state.usd}`
+    (this.state.amountUSD)
+      ? converterResult = `$${this.state.amountUSD}`
       : converterResult = '';
 
     return (
@@ -195,7 +206,7 @@ export default class NewExpense extends React.Component {
         </div>
         <div className='converter-container'>
           <form className='converter-form'>
-            <input required type='number' name='convert' className='converter-input' placeholder={this.state.currency} onChange={this.handleChange} />
+            <input required type='number' name='amountForeign' className='converter-input' placeholder={this.state.currency} onChange={this.handleChange} />
             <button type='submit' className='fas fa-calculator icon calculator' onClick={this.convertCurrency} />
           </form>
         </div>
