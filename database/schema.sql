@@ -23,9 +23,7 @@ create table "public"."expenses" (
   "category"  text,
   "subcategory" text,
   "notes"     text,
-  "currency"  text,
-  "exchangeRate"  numeric,
-  "amountUSD"     numeric,
+  "amount"    numeric,
   PRIMARY KEY("expenseId"),
   CONSTRAINT fk_trip
     FOREIGN KEY("tripId")
