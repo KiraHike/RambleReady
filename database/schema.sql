@@ -11,6 +11,7 @@ create table "public"."trips" (
   "startDate" date,
   "endDate"   date,
   "country"   text,
+  "currency"  text,
   "budget"    numeric,
   PRIMARY KEY("tripId")
 );
