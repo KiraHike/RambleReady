@@ -60,6 +60,7 @@ export default class NewExpense extends React.Component {
 
       view: null
     };
+    this.handleSelect = this.handleSelect.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -72,6 +73,15 @@ export default class NewExpense extends React.Component {
       .then(res => res.json())
       .then(trips => {
         this.setState({ trips });
+      });
+  }
+
+  handleSelect(event) {
+    const id = event.target.value;
+    fetch(`/api/trips/${id}`)
+      .then(res => res.json())
+      .then(trip => {
+        this.setState({ tripId: trip.tripId, currency: trip.currency });
       });
   }
 
@@ -129,7 +139,7 @@ export default class NewExpense extends React.Component {
           <div className='expense-form-container'>
             <button className='button-close right' onClick={this.handleClose}>x</button>
             <h3>{expenseCategories[type].category}</h3>
-            <NewExpenseDetail onChange={this.handleChange} value={this.value} category={expenseCategories[type].category} subcategoryArray={expenseCategories[type].subcategories} onSubmit={this.handleSubmit}/>
+            <NewExpenseDetail onChange={this.handleChange} value={this.value} category={expenseCategories[type].category} subcategoryArray={expenseCategories[type].subcategories} onSubmit={this.handleSubmit} />
           </div>
         </div>
       );
@@ -137,28 +147,28 @@ export default class NewExpense extends React.Component {
 
     if (!this.state.tripId) {
       return (
-      <div className='container'>
-        <form>
-          <TripSelect tripArray={this.state.trips} onChange={this.handleChange} value={this.value} />
-        </form>
-        <div className='icon-container'>
-          <button id='foodAndDrink' className='fas fa-utensils icon food' />
-          <button id='localTransportation' className='fas fa-bus icon local-transportation' />
-          <button id='shopping' className='fas fa-gift icon shopping' />
-          <button id='entertainment' className='fas fa-theater-masks icon entertainment' />
-          <button id='lodging' className='fas fa-bed icon lodging' />
-          <button id='internationalTransportation' className='fas fa-plane-departure icon international-transportation' />
-          <button id='administrative' className='fas fa-globe icon administrative' />
-          <button id='medical' className='fas fa-heartbeat icon medical' />
-          <button id='miscellaneous' className='fas fa-asterisk icon misc' />
-        </div>
-        <div className='converter-container'>
-          <form className='converter-form'>
-            <input disabled type='number' name='convert' className='converter-input' />
-            <button disabled type='submit' className='fas fa-calculator icon calculator' />
+        <div className='container'>
+          <form>
+            <TripSelect tripArray={this.state.trips} onChange={this.handleSelect} value={this.value} />
           </form>
+          <div className='icon-container'>
+            <button id='foodAndDrink' className='fas fa-utensils icon food' />
+            <button id='localTransportation' className='fas fa-bus icon local-transportation' />
+            <button id='shopping' className='fas fa-gift icon shopping' />
+            <button id='entertainment' className='fas fa-theater-masks icon entertainment' />
+            <button id='lodging' className='fas fa-bed icon lodging' />
+            <button id='internationalTransportation' className='fas fa-plane-departure icon international-transportation' />
+            <button id='administrative' className='fas fa-globe icon administrative' />
+            <button id='medical' className='fas fa-heartbeat icon medical' />
+            <button id='miscellaneous' className='fas fa-asterisk icon misc' />
+          </div>
+          <div className='converter-container'>
+            <form className='converter-form'>
+              <input disabled type='number' name='convert' className='converter-input' />
+              <button disabled type='submit' className='fas fa-calculator icon calculator' />
+            </form>
+          </div>
         </div>
-      </div>
       );
     }
 
@@ -170,7 +180,7 @@ export default class NewExpense extends React.Component {
     return (
       <div className='container'>
         <form>
-          <TripSelect tripArray={this.state.trips} onChange={this.handleChange} value={this.value} />
+          <TripSelect tripArray={this.state.trips} onChange={this.handleSelect} value={this.value} />
         </form>
         <div className='icon-container' onClick={this.handleClick}>
           <button id='foodAndDrink' className='fas fa-utensils icon food' />
