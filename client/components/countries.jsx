@@ -14,6 +14,7 @@ export default class Countries extends React.Component {
     });
     return (
       <select value={this.props.value} onChange={this.props.onChange} name='country' className='border-blue new-trip-input'>
+        <option>SELECT COUNTRY</option>
         {optionsList}
       </select>
     );
