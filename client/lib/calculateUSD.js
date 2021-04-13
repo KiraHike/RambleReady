@@ -1,3 +1,3 @@
-export default function calculate(usd, exchange) {
-  return (usd * exchange).toFixed(2);
+export default function calculate(foreignCurrency, exchange) {
+  return (foreignCurrency / exchange).toFixed(2);
 }
