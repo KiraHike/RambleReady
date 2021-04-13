@@ -133,6 +133,20 @@ app.get('/api/countries', (req, res, next) => {
     });
 });
 
+app.get('/api/countries/:country', (req, res, next) => {
+  const sql = `
+    select "currency"
+    from "countries"
+    where "country" = $1
+    `;
+  const params = [req.params.country];
+  db.query(sql, params)
+    .then(result => res.json(result.rows[0]))
+    .catch(err => {
+      next(err);
+    });
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
