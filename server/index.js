@@ -23,6 +23,7 @@ app.get('/api/trips', (req, res, next) => {
            "startDate",
            "endDate",
            "country",
+           "currency",
            "budget"
     from "trips"
     order by "startDate"
@@ -40,6 +41,7 @@ app.get('/api/trips/:tripId', (req, res, next) => {
            "startDate",
            "endDate",
            "country",
+           "currency",
            "budget"
     from "trips"
     where "tripId" = $1
@@ -53,13 +55,13 @@ app.get('/api/trips/:tripId', (req, res, next) => {
 });
 
 app.post('/api/trips', (req, res, next) => {
-  const { startDate, endDate, country, budget } = req.body;
+  const { startDate, endDate, country, currency, budget } = req.body;
   const sql = `
-    insert into "trips" ("startDate", "endDate", "country", "budget")
-    values ($1, $2, $3, $4)
+    insert into "trips" ("startDate", "endDate", "country", "currency", "budget")
+    values ($1, $2, $3, $4, $5)
     returning *
     `;
-  const params = [startDate, endDate, country, budget];
+  const params = [startDate, endDate, country, currency, budget];
   db.query(sql, params)
     .then(result => {
       const [trip] = result.rows;
