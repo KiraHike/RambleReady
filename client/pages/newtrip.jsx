@@ -13,6 +13,7 @@ export default class NewTrip extends React.Component {
       country: '',
       budget: ''
     };
+    this.handleSelect = this.handleSelect.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -22,6 +23,17 @@ export default class NewTrip extends React.Component {
       .then(res => res.json())
       .then(countries => {
         this.setState({ countries });
+      });
+  }
+
+  handleSelect(event) {
+    const selectedCountry = event.target.value;
+    let fetchedCurrency;
+    fetch(`/api/countries/${selectedCountry}`)
+      .then(res => res.json())
+      .then(currency => {
+        fetchedCurrency = currency.currency;
+        this.setState({ country: selectedCountry, currency: fetchedCurrency });
       });
   }
 
@@ -59,7 +71,7 @@ export default class NewTrip extends React.Component {
             <label htmlFor='endDate' className='text-dark-blue new-trip-label'>End Date</label>
             <input required type='date' name='endDate' className='border-dark-blue new-trip-input' onChange={this.handleChange} />
             <label htmlFor='country' className='text-blue new-trip-label'>Country</label>
-            <Countries value={this.value} onChange={this.handleChange} countriesArray = {this.state.countries} />
+            <Countries value={this.value} onChange={this.handleSelect} countriesArray = {this.state.countries} />
             <label htmlFor='budget' className='text-light-blue new-trip-label'>Budget</label>
             <input required type='number' name='budget' min='1' className='border-light-blue new-trip-input' onChange={this.handleChange} />
             <button type='submit' className='button-save'>SAVE</button>
