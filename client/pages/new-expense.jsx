@@ -50,25 +50,17 @@ export default class NewExpense extends React.Component {
       trips: [],
       tripId: null,
       currency: null,
-
       exchangeRate: null,
       amountForeign: null,
       amountUSD: null,
-
       view: null
 
-      // date: null,
-      // category: null,
-      // subcategory: null,
-      // notes: null,
-      // amount: null
     };
     this.handleSelect = this.handleSelect.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.convertCurrency = this.convertCurrency.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -127,21 +119,6 @@ export default class NewExpense extends React.Component {
       });
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    fetch('/api/expenses', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(this.state)
-    })
-      .then(res => {
-        res.json();
-        this.setState({ view: null });
-      });
-  }
-
   render() {
     if (this.state.view) {
       const type = this.state.view;
@@ -150,7 +127,7 @@ export default class NewExpense extends React.Component {
           <div className='expense-form-container'>
             <button className='button-close right' onClick={this.handleClose}>x</button>
             <h3>{expenseCategories[type].category}</h3>
-            <NewExpenseDetail onChange={this.handleChange} value={this.value} category={expenseCategories[type].category} subcategoryArray={expenseCategories[type].subcategories} onSubmit={this.handleSubmit} />
+            <NewExpenseDetail tripId={this.state.tripId} currency={this.state.currency} category={expenseCategories[type].category} subcategoryArray={expenseCategories[type].subcategories} />
           </div>
         </div>
       );
