@@ -8,7 +8,7 @@ export default class NewExpenseDetail extends React.Component {
   }
 
   makeOptions(array) {
-    if (!array) {
+    if (array.length < 1) {
       return <select disabled className='subcategory-select' />;
     } else {
       const optionsList = array.map(option => {
