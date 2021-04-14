@@ -146,8 +146,56 @@ export default class NewExpense extends React.Component {
           res.json();
           this.setState({ view: null });
         });
+    } else if (!this.state.toggleUSD && this.state.exchangeRate) {
+      const amountUSD = calculate(this.state.amount, this.state.exchangeRate);
+      fetch('/api/expenses', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          tripId: this.state.tripId,
+          date: this.state.date,
+          category: this.state.category,
+          subcategory: this.state.subcategory,
+          notes: this.state.notes,
+          amount: amountUSD
+        })
+      })
+        .then(res => {
+          res.json();
+          this.setState({ view: null });
+        });
+    } else {
+      fetch(`https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/pair/${this.state.currency}/USD`)
+        .then(result => {
+          return result.json();
+        })
+        .then(data => {
+          const amountUSD = calculate(this.state.amount, data.conversion_rate);
+          return fetch('/api/expenses', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              tripId: this.state.tripId,
+              date: this.state.date,
+              category: this.state.category,
+              subcategory: this.state.subcategory,
+              notes: this.state.notes,
+              amount: amountUSD
+            })
+          });
+        })
+        .then(res => {
+          res.json();
+          this.setState({ view: null });
+        })
+        .catch(err => {
+          console.error(err);
+        });
     }
-
   }
 
   render() {
