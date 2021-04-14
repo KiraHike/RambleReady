@@ -110,6 +110,47 @@ h2 {
   text-align: center;
 }
 
+.trip-balance {
+  height: 100px;
+  width: 80%;
+  background-color: white;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+}
+
+progress {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 80%;
+  height: 15px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #f3f3f3;
+  color: black;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #f3f3f3;
+  border-radius: 8px;
+}
+
+progress::-webkit-progress-value {
+  background-color: black;
+  border-radius: 8px;
+}
+
+progress::-moz-progress-bar {
+  background-color: black;
+  border-radius: 8px;
+}
+
 .icon-container {
   margin-top: 10px;
   display: flex;
@@ -129,11 +170,13 @@ h2 {
   margin: 10px;
 }
 
-.icon.food {
+.icon.food,
+.navIcon.green {
   color: #41c32c;
 }
 
-.icon.local-transportation {
+.icon.local-transportation,
+.navIcon.dark-blue {
   color: #123d92;
 }
 
@@ -141,7 +184,8 @@ h2 {
   color: #f22222;
 }
 
-.icon.entertainment {
+.icon.entertainment,
+.navIcon.purple {
   color: #8a0cc6;
 }
 
@@ -149,7 +193,8 @@ h2 {
   color: #f87e0e;
 }
 
-.icon.international-transportation {
+.icon.international-transportation,
+.navIcon.light-blue {
   color: #0aacf1;
 }
 

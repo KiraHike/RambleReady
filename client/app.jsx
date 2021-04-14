@@ -6,6 +6,7 @@ import Trips from './pages/trips';
 import NewTrip from './pages/newtrip';
 import EditTrip from './pages/edit-trip';
 import NewExpense from './pages/new-expense';
+import Home from './pages/home';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -32,6 +33,8 @@ export default class App extends React.Component {
       return <EditTrip tripId={tripId} />;
     } else if (route.path === 'newexpense') {
       return <NewExpense />;
+    } else if (route.path === 'home') {
+      return <Home />;
     }
   }
 
@@ -43,7 +46,7 @@ export default class App extends React.Component {
         <>
           <header><h1>Ramble Ready</h1></header>
           {this.renderPage()}
-          <footer><NavBar /></footer>
+          <footer><NavBar route={this.state.route} /></footer>
         </>
       </AppContext.Provider>
     );

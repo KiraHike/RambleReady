@@ -1,5 +1,4 @@
 import React from 'react';
-import AppContext from '../lib/app-context';
 import Accordion from '../components/accordion';
 
 export default class Trips extends React.Component {
@@ -30,5 +29,3 @@ export default class Trips extends React.Component {
     );
   }
 }
-
-Trips.contextType = AppContext;

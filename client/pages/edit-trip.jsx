@@ -1,5 +1,4 @@
 import React from 'react';
-import AppContext from '../lib/app-context';
 import dateYearMonthDay from '../lib/format-date-ymd';
 import dateMonthDayYear from '../lib/format-date-mdy';
 
@@ -116,5 +115,3 @@ export default class EditTrip extends React.Component {
     }
   }
 }
-
-EditTrip.contextType = AppContext;

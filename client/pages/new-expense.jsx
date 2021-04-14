@@ -1,5 +1,4 @@
 import React from 'react';
-import AppContext from '../lib/app-context';
 import NewExpenseDetail from '../components/new-expense-detail';
 import calculate from '../lib/calculateUSD';
 import TripSelect from '../components/trip-select';
@@ -298,5 +297,3 @@ export default class NewExpense extends React.Component {
     );
   }
 }
-
-NewExpense.contextType = AppContext;
