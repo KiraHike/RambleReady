@@ -4,11 +4,7 @@ import ToggleSwitch from './toggle-switch';
 export default class NewExpenseDetail extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      toggleUSD: false
-    };
     this.makeOptions = this.makeOptions.bind(this);
-    this.handleToggle = this.handleToggle.bind(this);
   }
 
   makeOptions(array) {
@@ -27,12 +23,6 @@ export default class NewExpenseDetail extends React.Component {
         </select>
       );
     }
-  }
-
-  handleToggle(event) {
-    (this.state.toggleUSD)
-      ? this.setState({ toggleUSD: false })
-      : this.setState({ toggleUSD: true });
   }
 
   render() {
@@ -57,8 +47,8 @@ export default class NewExpenseDetail extends React.Component {
         <div className='toggle-container'>
           <p className='toggle-currency'>{this.props.currency}</p>
           <ToggleSwitch
-            toggle={this.state.toggleUSD}
-            onClick={this.handleToggle}
+            toggle={this.props.toggle}
+            onClick={this.props.onClick}
           />
           <p className='toggle-currency'>USD</p>
         </div>

@@ -58,13 +58,15 @@ export default class NewExpense extends React.Component {
       category: null,
       subcategory: null,
       notes: null,
-      amount: null
+      amount: null,
+      toggleUSD: false
     };
     this.handleSelect = this.handleSelect.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.convertCurrency = this.convertCurrency.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -124,19 +126,28 @@ export default class NewExpense extends React.Component {
       });
   }
 
+  handleToggle(event) {
+    (this.state.toggleUSD)
+      ? this.setState({ toggleUSD: false })
+      : this.setState({ toggleUSD: true });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
-    fetch('/api/expenses', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(this.state)
-    })
-      .then(res => {
-        res.json();
-        this.setState({ view: null });
-      });
+    if (this.state.toggleUSD) {
+      fetch('/api/expenses', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.state)
+      })
+        .then(res => {
+          res.json();
+          this.setState({ view: null });
+        });
+    }
+
   }
 
   render() {
@@ -157,6 +168,8 @@ export default class NewExpense extends React.Component {
               subcategory={this.state.subcategory}
               notes={this.state.notes}
               date={this.state.date}
+              onClick={this.handleToggle}
+              toggle={this.state.toggleUSD}
             />
           </div>
         </div>
@@ -185,7 +198,7 @@ export default class NewExpense extends React.Component {
           </div>
           <div className='converter-container'>
             <form className='converter-form'>
-              <input disabled type='number' name='convert' className='converter-input' />
+              <input disabled type='number' className='converter-input' />
               <button disabled type='submit' className='fas fa-calculator icon calculator' />
             </form>
           </div>
