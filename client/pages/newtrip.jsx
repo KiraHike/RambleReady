@@ -28,12 +28,10 @@ export default class NewTrip extends React.Component {
 
   handleSelect(event) {
     const selectedCountry = event.target.value;
-    let fetchedCurrency;
     fetch(`/api/countries/${selectedCountry}`)
       .then(res => res.json())
       .then(currency => {
-        fetchedCurrency = currency.currency;
-        this.setState({ country: selectedCountry, currency: fetchedCurrency });
+        this.setState({ country: selectedCountry, currency: currency.currency });
       });
   }
 
