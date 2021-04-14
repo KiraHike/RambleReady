@@ -38,13 +38,16 @@ app.get('/api/trips', (req, res, next) => {
 app.get('/api/trips/:tripId', (req, res, next) => {
   const sql = `
     select "tripId",
-           "startDate",
-           "endDate",
-           "country",
-           "currency",
-           "budget"
-    from "trips"
+           "t"."startDate",
+           "t"."endDate",
+           "t"."country",
+           "t"."currency",
+           "t"."budget",
+           sum("e"."amount") as "tripSum"
+    from "trips" as "t"
+    left join "expenses" as "e" using ("tripId")
     where "tripId" = $1
+    group by "tripId"
     `;
   const params = [req.params.tripId];
   db.query(sql, params)
@@ -100,20 +103,6 @@ app.delete('/api/trips/:tripId', (req, res, next) => {
   const params = [req.params.tripId];
   db.query(sql, params)
     .then(result => res.json(result.rows[0]))
-    .catch(err => {
-      next(err);
-    });
-});
-
-app.get('/api/expenses/:tripId', (req, res, next) => {
-  const sql = `
-    select "amount"
-    from "expenses"
-    where "tripId" = $1
-    `;
-  const params = [req.params.tripId];
-  db.query(sql, params)
-    .then(result => res.json(result.rows))
     .catch(err => {
       next(err);
     });
