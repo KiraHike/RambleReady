@@ -6,7 +6,8 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      trips: []
+      trips: [],
+      expenses: []
     };
     this.handleSelect = this.handleSelect.bind(this);
   }
@@ -21,10 +22,10 @@ export default class Home extends React.Component {
 
   handleSelect(event) {
     const id = event.target.value;
-    fetch(`/api/trips/${id}`)
+    fetch(`/api/expenses/${id}`)
       .then(res => res.json())
-      .then(trip => {
-        this.setState({ tripId: trip.tripId, currency: trip.currency });
+      .then(expenses => {
+        this.setState({ expenses });
       });
   }
 
