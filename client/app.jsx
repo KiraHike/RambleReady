@@ -46,7 +46,7 @@ export default class App extends React.Component {
         <>
           <header><h1>Ramble Ready</h1></header>
           {this.renderPage()}
-          <footer><NavBar /></footer>
+          <footer><NavBar route={this.state.route} /></footer>
         </>
       </AppContext.Provider>
     );
