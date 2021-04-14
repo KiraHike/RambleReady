@@ -22,7 +22,7 @@ export default class TripSelect extends React.Component {
     });
     return (
       <select value={this.props.value} onChange={this.props.onChange} name='tripId' className='trip-select'>
-        <option>SELECT TRIP</option>
+        <option disabled>SELECT TRIP</option>
         {optionsList}
       </select>
     );
