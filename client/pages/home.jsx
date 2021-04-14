@@ -7,7 +7,8 @@ export default class Home extends React.Component {
     super(props);
     this.state = {
       trips: [],
-      expenses: []
+      trip: null,
+      tripBalance: null
     };
     this.handleSelect = this.handleSelect.bind(this);
   }
@@ -21,11 +22,22 @@ export default class Home extends React.Component {
   }
 
   handleSelect(event) {
-    const id = event.target.value;
-    fetch(`/api/expenses/${id}`)
+    fetch(`/api/trips/${event.target.value}`)
       .then(res => res.json())
-      .then(expenses => {
-        this.setState({ expenses });
+      .then(data => {
+        const trip = data;
+        return fetch(`/api/expenses/${trip.tripId}`)
+          .then(res => res.json())
+          .then(expenses => {
+            const tripSum = expenses.reduce((accumulator, currentValue) => {
+              return accumulator + Number(currentValue.amount);
+            }, Number(expenses[0].amount)).toFixed(2);
+            const tripBalance = (Number(trip.budget) - tripSum).toFixed(2);
+            this.setState({ trip, tripBalance });
+          });
+      })
+      .catch(err => {
+        console.error(err);
       });
   }
 
@@ -39,6 +51,9 @@ export default class Home extends React.Component {
             value={this.value}
           />
         </form>
+        <div className='tripBalance'>
+          {`Balance: $${this.state.tripBalance}`}
+        </div>
       </div>
     );
   }
