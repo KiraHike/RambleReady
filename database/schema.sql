@@ -13,7 +13,7 @@ create table "public"."trips" (
   "country"   text,
   "currency"  text,
   "budget"    numeric,
-  PRIMARY KEY("tripId")
+  primary key("tripId")
 );
 
 create table "public"."expenses" (
@@ -24,11 +24,11 @@ create table "public"."expenses" (
   "subcategory" text,
   "notes"     text,
   "amount"    numeric,
-  PRIMARY KEY("expenseId"),
-  CONSTRAINT fk_trip
-    FOREIGN KEY("tripId")
-      REFERENCES trips("tripId")
-        ON DELETE CASCADE
+  primary key("expenseId"),
+  constraint fk_trip
+    foreign key("tripId")
+      references trips("tripId")
+        on delete cascade
 );
 
 create table "public"."countries" (
