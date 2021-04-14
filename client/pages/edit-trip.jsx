@@ -99,14 +99,14 @@ export default class EditTrip extends React.Component {
             </a>
             <h3>Edit Trip</h3>
             <form className='form-new-trip' onSubmit={this.handleSubmit}>
-              <label htmlFor='startDate' className='text-dark-blue'>Start Date</label>
-              <input required type='date' name='startDate' className='border-dark-blue' value={startDateYearMonthDay} onChange={this.handleChange} />
-              <label htmlFor='endDate' className='text-dark-blue'>End Date</label>
-              <input required type='date' name='endDate' className='border-dark-blue' value={endDateYearMonthDay} onChange={this.handleChange} />
-              <label htmlFor='country' className='text-blue'>Country</label>
-              <input required type='text' name='country' className='border-blue' value={this.state.country} onChange={this.handleChange} />
-              <label htmlFor='budget' className='text-light-blue'>Budget</label>
-              <input required type='number' name='budget' min='1' className='border-light-blue' value={this.state.budget} onChange={this.handleChange} />
+              <label htmlFor='startDate' className='text-dark-blue new-trip-label'>Start Date</label>
+              <input required type='date' name='startDate' className='border-dark-blue new-trip-input' value={startDateYearMonthDay} onChange={this.handleChange} />
+              <label htmlFor='endDate' className='text-dark-blue new-trip-label'>End Date</label>
+              <input required type='date' name='endDate' className='border-dark-blue new-trip-input' value={endDateYearMonthDay} onChange={this.handleChange} />
+              <label htmlFor='country' className='text-blue new-trip-label'>Country</label>
+              <input disabled type='text' name='country' className='border-blue new-trip-input disabled' value={this.state.country} />
+              <label htmlFor='budget' className='text-light-blue new-trip-label'>Budget</label>
+              <input required type='number' name='budget' min='1' className='border-light-blue new-trip-input' value={this.state.budget} onChange={this.handleChange} />
                 <button type='submit' className='button-save right'>SAVE</button>
             </form>
             <button className='button-delete' onClick={this.handleDelete}>DELETE</button>

@@ -23,6 +23,7 @@ app.get('/api/trips', (req, res, next) => {
            "startDate",
            "endDate",
            "country",
+           "currency",
            "budget"
     from "trips"
     order by "startDate"
@@ -40,6 +41,7 @@ app.get('/api/trips/:tripId', (req, res, next) => {
            "startDate",
            "endDate",
            "country",
+           "currency",
            "budget"
     from "trips"
     where "tripId" = $1
@@ -53,13 +55,13 @@ app.get('/api/trips/:tripId', (req, res, next) => {
 });
 
 app.post('/api/trips', (req, res, next) => {
-  const { startDate, endDate, country, budget } = req.body;
+  const { startDate, endDate, country, currency, budget } = req.body;
   const sql = `
-    insert into "trips" ("startDate", "endDate", "country", "budget")
-    values ($1, $2, $3, $4)
+    insert into "trips" ("startDate", "endDate", "country", "currency", "budget")
+    values ($1, $2, $3, $4, $5)
     returning *
     `;
-  const params = [startDate, endDate, country, budget];
+  const params = [startDate, endDate, country, currency, budget];
   db.query(sql, params)
     .then(result => {
       const [trip] = result.rows;
@@ -96,6 +98,50 @@ app.delete('/api/trips/:tripId', (req, res, next) => {
       returning *
   `;
   const params = [req.params.tripId];
+  db.query(sql, params)
+    .then(result => res.json(result.rows[0]))
+    .catch(err => {
+      next(err);
+    });
+});
+
+app.post('/api/expenses', (req, res, next) => {
+  const { tripId, date, category, subcategory, notes, amount } = req.body;
+  const sql = `
+    insert into "expenses" ("tripId", "date", "category", "subcategory", "notes", "amount")
+    values ($1, $2, $3, $4, $5, $6)
+    returning *
+    `;
+  const params = [tripId, date, category, subcategory, notes, amount];
+  db.query(sql, params)
+    .then(result => {
+      const [expense] = result.rows;
+      res.status(201).json(expense);
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
+app.get('/api/countries', (req, res, next) => {
+  const sql = `
+    select "country"
+    from "countries"
+    `;
+  db.query(sql)
+    .then(result => res.json(result.rows))
+    .catch(err => {
+      next(err);
+    });
+});
+
+app.get('/api/countries/:country', (req, res, next) => {
+  const sql = `
+    select "currency"
+    from "countries"
+    where "country" = $1
+    `;
+  const params = [req.params.country];
   db.query(sql, params)
     .then(result => res.json(result.rows[0]))
     .catch(err => {

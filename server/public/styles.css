@@ -60,7 +60,8 @@ ul {
 }
 
 .container.new-trip,
-.container.confirm-delete {
+.container.confirm-delete,
+.container.new-expense {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -82,6 +83,19 @@ h2 {
   text-align: center;
   margin: 0;
   padding: 25px;
+}
+
+.trip-select {
+  background-color: #f3f3f3;
+  color: #123d92;
+  font-size: 1.5rem;
+  border: none;
+  margin: 0;
+  margin: 25px;
+}
+
+.trip-select.disabled {
+  cursor: no-drop;
 }
 
 .country-select {
@@ -169,6 +183,7 @@ h2 {
   border-radius: 8px;
   background-color: white;
   font-size: 1.5rem;
+  text-align: center;
 }
 
 .icon.calculator {
@@ -179,6 +194,143 @@ h2 {
   margin: 20px 10px 10px 10px;
   color: #123d92;
   font-size: 1.5rem;
+}
+
+.expense-form-container {
+  margin: 20px 0;
+  height: 375px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.form-new-expense {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.subcategory-amount,
+.subcategory-select {
+  height: 3rem;
+  width: 38%;
+  background-color: white;
+  border: 3px solid #123d92;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.subcategory-select {
+  margin-left: 10px;
+  padding: 4px;
+}
+
+.toggle-container {
+  width: 80%;
+  margin: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.toggle-currency {
+  padding: 5px 20px;
+  margin: 0;
+}
+
+.toggle-switch {
+  display: none;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  margin: 5px 0;
+  width: 50px;
+  height: 25px;
+  border: none;
+  border-radius: 25px;
+}
+
+.switch-label {
+  width: 50px;
+  height: 25px;
+  position: absolute;
+  cursor: pointer;
+}
+
+.switch.on {
+  background-color: #8a0cc6;
+}
+
+.switch.off {
+  background-color: #41c32c;
+}
+
+.toggle {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background-color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: all 0.25s ease 0s;
+}
+
+.toggle.on {
+  border: 3px solid #8a0cc6;
+  top: 0;
+  right: 25px;
+  bottom: 0;
+  left: 0;
+}
+
+.toggle.off {
+  border: 3px solid #41c32c;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 25px;
+}
+
+.expense-notes {
+  font-family: 'open-sans', sans-serif;
+  height: 5rem;
+  width: 80%;
+  border: 3px solid #0a67f1;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.expense-date {
+  height: 3rem;
+  width: 56%;
+  background-color: white;
+  border: 3px solid #0aacf1;
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 4px;
+}
+
+.button-add-expense {
+  width: 60px;
+  height: 2.9rem;
+  margin-left: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #41c32c;
+  color: white;
+  font-size: 1rem;
 }
 
 .button-add-trip {
@@ -216,6 +368,7 @@ h2 {
   font-size: 1.3rem;
   font-weight: 300;
   margin: 0;
+  cursor: pointer;
 }
 
 .trip-list-details {
@@ -300,19 +453,26 @@ h3 {
   align-items: center;
 }
 
-label {
+.new-trip-label {
   align-self: flex-start;
   padding-left: 12%;
 }
 
-input {
+.new-trip-input {
   height: 3rem;
   width: 80%;
   margin: 8px 0;
   border: 3px solid;
   border-radius: 8px;
   font-size: 1rem;
-  text-align: center;
+  padding: 5px;
+  background-color: white;
+}
+
+.new-trip-input.disabled {
+  background-color: #f3f3f3;
+  color: black;
+  cursor: no-drop;
 }
 
 input:hover {
