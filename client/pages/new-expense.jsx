@@ -39,7 +39,7 @@ const expenseCategories = {
   },
   miscellaneous: {
     category: 'Miscellaneous',
-    subcategories: null
+    subcategories: []
   }
 };
 
@@ -127,9 +127,7 @@ export default class NewExpense extends React.Component {
   }
 
   handleToggle(event) {
-    (this.state.toggleUSD)
-      ? this.setState({ toggleUSD: false })
-      : this.setState({ toggleUSD: true });
+    this.setState({ toggleUSD: !this.state.toggleUSD });
   }
 
   handleSubmit(event) {
@@ -143,7 +141,6 @@ export default class NewExpense extends React.Component {
         body: JSON.stringify(this.state)
       })
         .then(res => {
-          res.json();
           this.setState({ view: null });
         });
     } else if (!this.state.toggleUSD && this.state.exchangeRate) {
@@ -163,7 +160,6 @@ export default class NewExpense extends React.Component {
         })
       })
         .then(res => {
-          res.json();
           this.setState({ view: null });
         });
     } else {
@@ -189,7 +185,6 @@ export default class NewExpense extends React.Component {
           });
         })
         .then(res => {
-          res.json();
           this.setState({ view: null });
         })
         .catch(err => {
