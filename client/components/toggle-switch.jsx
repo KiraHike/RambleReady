@@ -2,19 +2,13 @@ import React from 'react';
 
 export default class ToggleSwitch extends React.Component {
   render() {
-    if (this.props.toggle) {
-      return (
-        <div className="switch off">
-          <input className="toggle-switch" type="checkbox" />
-          <span className="toggle off" />
-          <label htmlFor="toggle-switch" className="switch-label" onClick={this.props.onClick}></label>
-        </div>
-      );
-    }
+    const toggleClass = this.props.toggle
+      ? 'off'
+      : 'on';
     return (
-      <div className="switch on">
+      <div className={`switch ${toggleClass}`}>
         <input className="toggle-switch" type="checkbox" />
-        <span className="toggle on" />
+        <span className={`toggle ${toggleClass}`} />
         <label htmlFor="toggle-switch" className="switch-label" onClick={this.props.onClick}></label>
       </div>
     );
