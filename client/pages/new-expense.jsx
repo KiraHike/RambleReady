@@ -53,14 +53,19 @@ export default class NewExpense extends React.Component {
       exchangeRate: null,
       amountForeign: null,
       amountUSD: null,
-      view: null
-
+      view: null,
+      date: null,
+      category: null,
+      subcategory: null,
+      notes: null,
+      amount: null
     };
     this.handleSelect = this.handleSelect.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.convertCurrency = this.convertCurrency.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -88,7 +93,7 @@ export default class NewExpense extends React.Component {
   handleClick(event) {
     if (event.target.matches('button')) {
       window.location.hash = `#newexpense?tripId=${this.state.tripId}?currency=${this.state.currency}`;
-      this.setState({ view: event.target.id });
+      this.setState({ view: event.target.id, category: event.target.id });
     }
   }
 
@@ -119,6 +124,21 @@ export default class NewExpense extends React.Component {
       });
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    fetch('/api/expenses', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    })
+      .then(res => {
+        res.json();
+        this.setState({ view: null });
+      });
+  }
+
   render() {
     if (this.state.view) {
       const type = this.state.view;
@@ -127,7 +147,17 @@ export default class NewExpense extends React.Component {
           <div className='expense-form-container'>
             <button className='button-close right' onClick={this.handleClose}>x</button>
             <h3>{expenseCategories[type].category}</h3>
-            <NewExpenseDetail tripId={this.state.tripId} currency={this.state.currency} category={expenseCategories[type].category} subcategoryArray={expenseCategories[type].subcategories} />
+            <NewExpenseDetail
+              currency={this.state.currency}
+              category={expenseCategories[type].category}
+              subcategoryArray={expenseCategories[type].subcategories}
+              onChange={this.handleChange}
+              onSubmit={this.handleSubmit}
+              amount={this.state.amount}
+              subcategory={this.state.subcategory}
+              notes={this.state.notes}
+              date={this.state.date}
+            />
           </div>
         </div>
       );
@@ -137,7 +167,10 @@ export default class NewExpense extends React.Component {
       return (
         <div className='container'>
           <form>
-            <TripSelect tripArray={this.state.trips} onChange={this.handleSelect} value={this.value} />
+            <TripSelect
+              tripArray={this.state.trips}
+              onChange={this.handleSelect}
+              value={this.value} />
           </form>
           <div className='icon-container'>
             <button id='foodAndDrink' className='fas fa-utensils icon food' />
@@ -168,9 +201,16 @@ export default class NewExpense extends React.Component {
     return (
       <div className='container'>
         <form>
-          <TripSelect tripArray={this.state.trips} onChange={this.handleSelect} value={this.value} />
+          <TripSelect
+            tripArray={this.state.trips}
+            onChange={this.handleSelect}
+            value={this.value}
+          />
         </form>
-        <div className='icon-container' onClick={this.handleClick}>
+        <div
+          className='icon-container'
+          onClick={this.handleClick}
+        >
           <button id='foodAndDrink' className='fas fa-utensils icon food' />
           <button id='localTransportation' className='fas fa-bus icon local-transportation' />
           <button id='shopping' className='fas fa-gift icon shopping' />
@@ -183,8 +223,18 @@ export default class NewExpense extends React.Component {
         </div>
         <div className='converter-container'>
           <form className='converter-form'>
-            <input required type='number' name='amountForeign' className='converter-input' placeholder={this.state.currency} onChange={this.handleChange} />
-            <button type='submit' className='fas fa-calculator icon calculator' onClick={this.convertCurrency} />
+            <input required
+              type='number'
+              name='amountForeign'
+              className='converter-input'
+              placeholder={this.state.currency}
+              onChange={this.handleChange}
+            />
+            <button
+              type='submit'
+              className='fas fa-calculator icon calculator'
+              onClick={this.convertCurrency}
+            />
           </form>
         </div>
         <div className='converter-result'>{converterResult}</div>
