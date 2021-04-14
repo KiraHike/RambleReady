@@ -170,11 +170,13 @@ progress::-moz-progress-bar {
   margin: 10px;
 }
 
-.icon.food {
+.icon.food,
+.navIcon.green {
   color: #41c32c;
 }
 
-.icon.local-transportation {
+.icon.local-transportation,
+.navIcon.dark-blue {
   color: #123d92;
 }
 
@@ -182,7 +184,8 @@ progress::-moz-progress-bar {
   color: #f22222;
 }
 
-.icon.entertainment {
+.icon.entertainment,
+.navIcon.purple {
   color: #8a0cc6;
 }
 
@@ -190,7 +193,8 @@ progress::-moz-progress-bar {
   color: #f87e0e;
 }
 
-.icon.international-transportation {
+.icon.international-transportation,
+.navIcon.light-blue {
   color: #0aacf1;
 }
 
