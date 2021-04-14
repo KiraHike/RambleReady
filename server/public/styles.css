@@ -94,6 +94,10 @@ h2 {
   margin: 25px;
 }
 
+.trip-select.disabled {
+  cursor: no-drop;
+}
+
 .country-select {
   height: 80px;
   min-width: fit-content;
@@ -179,6 +183,7 @@ h2 {
   border-radius: 8px;
   background-color: white;
   font-size: 1.5rem;
+  text-align: center;
 }
 
 .icon.calculator {
@@ -217,6 +222,7 @@ h2 {
   border: 3px solid #123d92;
   border-radius: 8px;
   font-size: 1rem;
+  margin-top: 10px;
 }
 
 .subcategory-select {
@@ -226,7 +232,7 @@ h2 {
 
 .toggle-container {
   width: 80%;
-  padding: 5px;
+  margin: 15px;
   display: flex;
   justify-content: center;
 }
@@ -299,13 +305,21 @@ h2 {
 .expense-notes {
   font-family: 'open-sans', sans-serif;
   height: 5rem;
-  border-color: #0a67f1;
+  width: 80%;
+  border: 3px solid #0a67f1;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 15px;
 }
 
 .expense-date {
+  height: 3rem;
   width: 56%;
   background-color: white;
-  border-color: #0aacf1;
+  border: 3px solid #0aacf1;
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 4px;
 }
 
 .button-add-expense {
