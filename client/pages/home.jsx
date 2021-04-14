@@ -8,6 +8,7 @@ export default class Home extends React.Component {
     this.state = {
       trips: [],
       trip: null,
+      tripSum: null,
       tripBalance: null
     };
     this.handleSelect = this.handleSelect.bind(this);
@@ -29,11 +30,15 @@ export default class Home extends React.Component {
         return fetch(`/api/expenses/${trip.tripId}`)
           .then(res => res.json())
           .then(expenses => {
-            const tripSum = expenses.reduce((accumulator, currentValue) => {
-              return accumulator + Number(currentValue.amount);
-            }, Number(expenses[0].amount)).toFixed(2);
-            const tripBalance = (Number(trip.budget) - tripSum).toFixed(2);
-            this.setState({ trip, tripBalance });
+            if (expenses.length < 1) {
+              this.setState({ trip, tripSum: null, tripBalance: 0 });
+            } else {
+              const tripSum = expenses.reduce((accumulator, currentValue) => {
+                return accumulator + Number(currentValue.amount);
+              }, Number(expenses[0].amount)).toFixed(2);
+              const tripBalance = (Number(trip.budget) - tripSum).toFixed(2);
+              this.setState({ trip, tripSum, tripBalance });
+            }
           });
       })
       .catch(err => {
@@ -42,6 +47,19 @@ export default class Home extends React.Component {
   }
 
   render() {
+    if (!this.state.trip) {
+      return (
+        <div className='container'>
+          <form>
+            <TripSelect
+              tripArray={this.state.trips}
+              onChange={this.handleSelect}
+              value={this.value}
+            />
+          </form>
+        </div>
+      );
+    }
     return (
       <div className='container'>
         <form>
@@ -51,8 +69,9 @@ export default class Home extends React.Component {
             value={this.value}
           />
         </form>
-        <div className='tripBalance'>
-          {`Balance: $${this.state.tripBalance}`}
+        <div className='trip-balance'>
+          {`Balance:  $${this.state.tripBalance}`}
+          <progress className='progress-bar' max={Number(this.state.trip.budget)} value={this.state.tripSum} />
         </div>
       </div>
     );
