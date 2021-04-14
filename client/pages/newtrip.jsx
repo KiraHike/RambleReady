@@ -1,5 +1,4 @@
 import React from 'react';
-import AppContext from '../lib/app-context';
 import Countries from '../components/countries';
 
 export default class NewTrip extends React.Component {
@@ -79,5 +78,3 @@ export default class NewTrip extends React.Component {
     );
   }
 }
-
-NewTrip.contextType = AppContext;
