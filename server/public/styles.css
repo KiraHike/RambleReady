@@ -155,7 +155,9 @@ progress::-moz-progress-bar {
   width: 175px;
   height: 175px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   border: none;
   border-radius: 50%;
   background-color: #123d92;
