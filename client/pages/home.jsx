@@ -8,7 +8,9 @@ export default class Home extends React.Component {
       trips: [],
       trip: null,
       tripSum: 0,
-      tripBalance: 0
+      tripBalance: 0,
+      dailyBalance: 0,
+      today: new Date()
     };
     this.handleSelect = this.handleSelect.bind(this);
   }
@@ -25,13 +27,9 @@ export default class Home extends React.Component {
     fetch(`/api/trips/${event.target.value}`)
       .then(res => res.json())
       .then(trip => {
-        if (!trip.tripSum) {
-          this.setState({ trip, tripSum: 0, tripBalance: 0 });
-        } else {
-          const tripSum = Number(trip.tripSum);
-          const tripBalance = (Number(trip.budget) - tripSum).toFixed(2);
-          this.setState({ trip, tripSum, tripBalance });
-        }
+        const tripSum = Number(trip.tripSum);
+        const tripBalance = (Number(trip.budget) - tripSum).toFixed(2);
+        this.setState({ trip, tripSum, tripBalance });
       })
       .catch(err => {
         console.error(err);
@@ -64,6 +62,9 @@ export default class Home extends React.Component {
         <div className='trip-balance'>
           {`Balance:  $${this.state.tripBalance}`}
           <progress className='progress-bar' max={Number(this.state.trip.budget)} value={this.state.trip.tripSum} />
+        </div>
+        <div className='daily-balance'>
+          {'Spent Today:'}
         </div>
       </div>
     );
