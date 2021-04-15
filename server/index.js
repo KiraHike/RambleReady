@@ -114,6 +114,25 @@ app.delete('/api/trips/:tripId', (req, res, next) => {
     });
 });
 
+app.get('/api/expenses/:tripId', (req, res, next) => {
+  const sql = `
+    select "date",
+           "category",
+           "subcategory",
+           "notes",
+           "amount"
+        from "expenses"
+      where "tripId" = $1
+      order by "date"
+    `;
+  const params = [req.params.tripId];
+  db.query(sql, params)
+    .then(result => res.json(result.rows))
+    .catch(err => {
+      next(err);
+    });
+});
+
 app.post('/api/expenses', (req, res, next) => {
   const { tripId, date, category, subcategory, notes, amount } = req.body;
   const sql = `
