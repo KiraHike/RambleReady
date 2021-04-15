@@ -151,6 +151,21 @@ progress::-moz-progress-bar {
   border-radius: 8px;
 }
 
+.daily-balance {
+  width: 175px;
+  height: 175px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background-color: #123d92;
+  color: white;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
 .icon-container {
   margin-top: 10px;
   display: flex;
