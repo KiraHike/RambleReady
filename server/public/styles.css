@@ -155,13 +155,13 @@ progress::-moz-progress-bar {
   width: 175px;
   height: 175px;
   display: flex;
-  justify-content: center;
   align-items: center;
   border: none;
   border-radius: 50%;
   background-color: #123d92;
   color: white;
   font-size: 1.3rem;
+  text-align: center;
 }
 
 .icon-container {
