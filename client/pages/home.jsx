@@ -1,6 +1,7 @@
 import React from 'react';
 import TripSelect from '../components/trip-select';
 import formatYearMonthDay from '../lib/format-date-ymd';
+import triplength from '../lib/trip-length';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -10,6 +11,8 @@ export default class Home extends React.Component {
       trip: null,
       tripSum: 0,
       tripBalance: 0,
+      tripLength: 0,
+      dailyBudget: 0,
       dailySum: 0,
       today: new Date().toISOString()
     };
@@ -37,7 +40,9 @@ export default class Home extends React.Component {
             dailySum = (trip.expenses[i].dailySum).toFixed(2);
           }
         }
-        this.setState({ trip, tripSum, tripBalance, today, dailySum });
+        const tripLength = triplength(trip.startDate, trip.endDate);
+        const dailyBudget = (tripBalance / tripLength).toFixed(2);
+        this.setState({ trip, tripSum, tripBalance, today, dailySum, tripLength, dailyBudget });
       })
       .catch(err => {
         console.error(err);
