@@ -1,7 +1,7 @@
 import React from 'react';
 import TripSelect from '../components/trip-select';
 import formatYearMonthDay from '../lib/format-date-ymd';
-import triplength from '../lib/trip-length';
+import remainingDays from '../lib/remaining-days';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -11,7 +11,7 @@ export default class Home extends React.Component {
       trip: null,
       tripSum: 0,
       tripBalance: 0,
-      tripLength: 0,
+      tripRemainingDays: 0,
       dailyBudget: 0,
       dailySum: 0,
       today: new Date().toISOString()
@@ -40,9 +40,9 @@ export default class Home extends React.Component {
             dailySum = (trip.expenses[i].dailySum).toFixed(2);
           }
         }
-        const tripLength = triplength(trip.startDate, trip.endDate);
-        const dailyBudget = (tripBalance / tripLength).toFixed(2);
-        this.setState({ trip, tripSum, tripBalance, today, dailySum, tripLength, dailyBudget });
+        const tripRemainingDays = remainingDays(trip.startDate, trip.endDate);
+        const dailyBudget = (tripBalance / tripRemainingDays).toFixed(2);
+        this.setState({ trip, tripSum, tripBalance, today, dailySum, tripRemainingDays, dailyBudget });
       })
       .catch(err => {
         console.error(err);
@@ -73,12 +73,17 @@ export default class Home extends React.Component {
           />
         </form>
         <div className='trip-balance'>
-          {`Balance:  $${this.state.tripBalance}`}
+          <p>Trip Balance</p>
+          {`$${this.state.tripBalance}`}
           <progress className='progress-bar' max={Number(this.state.trip.budget)} value={this.state.trip.tripSum} />
         </div>
+        <div className='daily-budget'>
+          <p>Daily Budget</p>
+          {`$${this.state.dailyBudget}`}
+        </div>
         <div className='daily-balance'>
-          {`Spent Today:
-          $${this.state.dailySum}`}
+          <p>Spent Today</p>
+          {`$${this.state.dailySum}`}
         </div>
       </div>
     );
