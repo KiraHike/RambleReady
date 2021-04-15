@@ -39,9 +39,10 @@ app.get('/api/trips/:tripId', (req, res, next) => {
   const sql = `
     with "tripExpenses" as (
       select "date",
-            "amount"
+            sum("amount") as "dailySum"
         from "expenses"
       where "tripId" = $1
+      group by "date"
     )
     select "budget",
           "country",
@@ -49,7 +50,7 @@ app.get('/api/trips/:tripId', (req, res, next) => {
           "endDate",
           "startDate",
           "tripId",
-          coalesce((select sum("amount") from "tripExpenses"), 0) as "tripSum",
+          coalesce((select sum("dailySum") from "tripExpenses"), 0) as "tripSum",
           coalesce((select json_agg("tripExpenses") from "tripExpenses"), '[]'::json) as "expenses"
       from "trips"
     where "tripId" = $1
