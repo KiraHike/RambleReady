@@ -1,6 +1,6 @@
 const differenceInDays = require('date-fns/differenceInCalendarDays');
 
-export default function remainingDays(startISO, endISO) {
+function remainingDays(startISO, endISO) {
   const startDate = new Date(startISO);
   const endDate = new Date(endISO);
   let days;
@@ -12,3 +12,5 @@ export default function remainingDays(startISO, endISO) {
   }
   return Math.abs(days) + 1;
 }
+
+export default remainingDays;
