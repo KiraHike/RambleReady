@@ -25,7 +25,7 @@ export default class NavBar extends React.Component {
       {
         active: 'navIcon purple fas fa-chart-pie',
         inactive: 'navIcon fas fa-chart-pie',
-        route: ''
+        route: 'stats'
       },
       {
         active: 'navIcon light-blue fas fa-suitcase',
