@@ -118,6 +118,7 @@ app.get('/api/expenses/:tripId', (req, res, next) => {
   const sql = `
     select "date",
           json_agg(json_build_object(
+            'expenseId',   "expenseId",
             'category',    "category",
             'subcategory', "subcategory",
             'notes',       "notes",
