@@ -116,17 +116,30 @@ app.delete('/api/trips/:tripId', (req, res, next) => {
 
 app.get('/api/expenses/:tripId', (req, res, next) => {
   const sql = `
-    select "date",
-          json_agg(json_build_object(
-            'expenseId',   "expenseId",
-            'category',    "category",
-            'subcategory', "subcategory",
-            'notes',       "notes",
-            'amount',      "amount"
-          )) as "expenses"
+    with "expenseItems" as (
+      select  "date",
+              "category",
+              json_build_object(
+                'subcategory', "subcategory",
+                'notes',       "notes",
+                'amount',      "amount",
+                'expenseId',   "expenseId"
+    ) as "expense"
       from "expenses"
-    where "tripId" = $1
-    group by "date"
+      where "tripId" = $1
+    ), "expenseItemsByCategory" as (
+      select  "date",
+              json_build_object(
+                'category', "category",
+                'expenses', array_agg("expense")
+              ) as "categories"
+      from "expenseItems"
+      group by "date", "category"
+    )
+      select "date",
+        array_agg("categories") as "expenses"
+      from "expenseItemsByCategory"
+      group by "date"
     `;
   const params = [req.params.tripId];
   db.query(sql, params)
