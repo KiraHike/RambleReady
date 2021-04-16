@@ -398,7 +398,7 @@ progress::-moz-progress-bar {
 }
 
 .button-add-trip,
-.daily-expenses-header-container-open {
+.daily-expenses-button {
   height: 60px;
   width: 300px;
   border: none;
@@ -409,15 +409,14 @@ progress::-moz-progress-bar {
 }
 
 .button-add-trip:hover,
-.button-add-trip:active {
+.daily-expenses-button:hover {
   border: 3px solid #0aacf1;
   background-color: white;
   color: #0aacf1;
   cursor: pointer;
 }
 
-.trip-list-header-container,
-.daily-expenses-header-container-closed {
+.trip-list-header-container {
   height: 60px;
   width: 300px;
   margin: 5px 0;
@@ -430,8 +429,7 @@ progress::-moz-progress-bar {
   align-items: center;
 }
 
-.trip-list-header,
-.daily-expenses-header {
+.trip-list-header {
   font-size: 1.3rem;
   font-weight: 300;
   margin: 0;
