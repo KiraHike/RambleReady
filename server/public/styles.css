@@ -397,7 +397,8 @@ progress::-moz-progress-bar {
   font-size: 1rem;
 }
 
-.button-add-trip {
+.button-add-trip,
+.daily-expenses-header-container-open {
   height: 60px;
   width: 300px;
   border: none;
@@ -415,7 +416,8 @@ progress::-moz-progress-bar {
   cursor: pointer;
 }
 
-.trip-list-header-container {
+.trip-list-header-container,
+.daily-expenses-header-container-closed {
   height: 60px;
   width: 300px;
   margin: 5px 0;
@@ -428,7 +430,8 @@ progress::-moz-progress-bar {
   align-items: center;
 }
 
-.trip-list-header {
+.trip-list-header,
+.daily-expenses-header {
   font-size: 1.3rem;
   font-weight: 300;
   margin: 0;
