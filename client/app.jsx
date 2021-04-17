@@ -7,6 +7,7 @@ import NewTrip from './pages/newtrip';
 import EditTrip from './pages/edit-trip';
 import NewExpense from './pages/new-expense';
 import Home from './pages/home';
+import Stats from './pages/stats';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -35,6 +36,8 @@ export default class App extends React.Component {
       return <NewExpense />;
     } else if (route.path === 'home') {
       return <Home />;
+    } else if (route.path === 'stats') {
+      return <Stats />;
     }
   }
 

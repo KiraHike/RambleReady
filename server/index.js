@@ -114,6 +114,41 @@ app.delete('/api/trips/:tripId', (req, res, next) => {
     });
 });
 
+app.get('/api/expenses/:tripId', (req, res, next) => {
+  const sql = `
+    with "expenseItems" as (
+      select  "date",
+              "category",
+              json_build_object(
+                'subcategory', "subcategory",
+                'notes',       "notes",
+                'amount',      "amount",
+                'expenseId',   "expenseId"
+    ) as "expense"
+      from "expenses"
+      where "tripId" = $1
+    ), "expenseItemsByCategory" as (
+      select  "date",
+              json_build_object(
+                'category', "category",
+                'expenses', array_agg("expense")
+              ) as "categories"
+      from "expenseItems"
+      group by "date", "category"
+    )
+      select "date",
+        array_agg("categories") as "expenses"
+      from "expenseItemsByCategory"
+      group by "date"
+    `;
+  const params = [req.params.tripId];
+  db.query(sql, params)
+    .then(result => res.json(result.rows))
+    .catch(err => {
+      next(err);
+    });
+});
+
 app.post('/api/expenses', (req, res, next) => {
   const { tripId, date, category, subcategory, notes, amount } = req.body;
   const sql = `
