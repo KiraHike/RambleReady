@@ -84,37 +84,50 @@ export default class Stats extends React.Component {
           if (category.category === categoryHeaders[i].category) {
             header = categoryHeaders[i].header;
             items = category.expenses.map(item => {
-              return (
-                  <li key={item.expenseId}>
+              if (item.notes) {
+                return (
+                  <li className='line-item-list-item-li' key={item.expenseId}>
                     <div>
-                      {item.subcategory}
-                      {'$' + (item.amount).toFixed(2)}
-                    </div>
-                    <div>
-                      {item.notes}
+                      <div className='line-item-list-item'>
+                        <span className='line-item-list-item-subcategory'>{item.subcategory}</span>
+                        <span className='line-item-list-item-amount'>{'$' + (item.amount).toFixed(2)}</span>
+                      </div>
+                      <div className='line-item-list-notes'>
+                        {item.notes}
+                      </div>
                     </div>
                   </li>
-              );
+                );
+              } else {
+                return (
+                  <li className='line-item-list-item-li' key={item.expenseId}>
+                    <div className='line-item-list-item'>
+                      <span className='line-item-list-item-subcategory'>{item.subcategory}</span>
+                      <span className='line-item-list-item-amount'>{'$' + (item.amount).toFixed(2)}</span>
+                    </div>
+                  </li>
+                );
+              }
             });
           }
         }
         return (
-            <ul key={date.date + category.category}>
-              <h4>{header}</h4>
-              {items}
-            </ul>
+          <ul className='line-item-list-category' key={date.date + category.category}>
+            <h4 className='line-item-list-category-header'>{header}</h4>
+            {items}
+          </ul>
         );
       });
       return (
-      <ol key={date.date}>
-        {formattedDate}
-        {categories}
+        <ol className='line-item-list' key={date.date}>
+          <h3 className='line-item-list-date'>{formattedDate}</h3>
+          {categories}
         </ol>
       );
     });
     return (
       <>
-      {dates}
+        {dates}
       </>
     );
   }
@@ -128,7 +141,6 @@ export default class Stats extends React.Component {
             <TripSelect
               tripArray={this.state.trips}
               onChange={this.handleSelect}
-              value={this.value}
             />
           </form>
         </div>
@@ -142,10 +154,9 @@ export default class Stats extends React.Component {
             <TripSelect
               tripArray={this.state.trips}
               onChange={this.handleSelect}
-              value={this.value}
             />
           </form>
-            <button className='daily-expenses-button' onClick={this.handleClick}>Daily Expenses</button>
+          <button className='daily-expenses-button' onClick={this.handleClick}>Daily Expenses</button>
         </div>
       );
     }
@@ -156,12 +167,11 @@ export default class Stats extends React.Component {
           <TripSelect
             tripArray={this.state.trips}
             onChange={this.handleSelect}
-            value={this.value}
           />
         </form>
-          <button className='daily-expenses-button' onClick={this.handleClick}>Daily Expenses</button>
-        <div>
-        {lineItems}
+        <button className='daily-expenses-button' onClick={this.handleClick}>Daily Expenses</button>
+        <div className='line-item-list-container'>
+          {lineItems}
         </div>
       </div>
     );
