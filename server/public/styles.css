@@ -464,14 +464,13 @@ progress::-moz-progress-bar {
   background-color: #0aacf1;
   color: white;
   font-size: 1.3rem;
+  cursor: pointer;
 }
 
-.button-add-trip:hover,
-.daily-expenses-button:hover {
-  border: 3px solid #0aacf1;
-  background-color: white;
-  color: #0aacf1;
-  cursor: pointer;
+.trip-expenses-header {
+  margin-top: 15px;
+  color: #8a0cc6;
+  font-weight: 500;
 }
 
 .trip-list-header-container {
