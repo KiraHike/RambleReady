@@ -194,8 +194,8 @@ export default class Stats extends React.Component {
             />
           </form>
           <button className='daily-expenses-button' onClick={this.handleClick}>View Line Items</button>
-          <div>
-            <h3 className='trip-expenses-header'>Trip Expenses:</h3>
+          <div className='chart-container pie'>
+            <h3 className='trip-expenses-header'>Trip Expenses</h3>
             <PieChart data={{
               labels: [
                 `Admin. $${this.state.pieChartData[0]}`,
@@ -225,8 +225,8 @@ export default class Stats extends React.Component {
               }]
             }} />
           </div>
-          <div>
-            <h3 className='trip-expenses-header'>Daily Expenses:</h3>
+          <div className='chart-container bar'>
+            <h3 className='trip-expenses-header'>Daily Expenses</h3>
             <BarChart data={{
               labels: this.state.barChartDataLabels,
               datasets: [{
