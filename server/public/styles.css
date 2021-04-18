@@ -90,7 +90,7 @@ h2 {
   color: #123d92;
   font-size: 1.5rem;
   border: none;
-  margin: 30px;
+  margin: 30px 0 20px 0;
 }
 
 .trip-select.disabled {
@@ -467,8 +467,25 @@ progress::-moz-progress-bar {
   cursor: pointer;
 }
 
+.chart-container {
+  width: 300px;
+  height: 250px;
+  background-color: white;
+  border: none;
+  border-radius: 8px;
+  margin-top: 20px;
+  padding: 5px;
+}
+
+.chart-container.pie {
+  height: 250px;
+}
+
+.chart-container.bar {
+  height: 180px;
+}
+
 .trip-expenses-header {
-  margin-top: 15px;
   color: #8a0cc6;
   font-weight: 500;
 }
