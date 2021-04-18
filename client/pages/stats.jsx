@@ -135,11 +135,7 @@ export default class Stats extends React.Component {
   }
 
   makePieChartData(pieChartDataArray) {
-    const data = [];
-    for (let i = 0; i < pieChartDataArray.length; i++) {
-      data.push(pieChartDataArray[i].total.toFixed(2));
-    }
-    return data;
+    return pieChartDataArray.map(datum => datum.total.toFixed(2));
   }
 
   handleSelect(event) {
