@@ -2,6 +2,7 @@ import React from 'react';
 import TripSelect from '../components/trip-select';
 import formatMonthDayYear from '../lib/format-date-mdy';
 import PieChart from '../components/pie-chart';
+import BarChart from '../components/bar-chart';
 
 const categoryHeaders = [
   {
@@ -51,6 +52,9 @@ const categoryHeaders = [
   }
 ];
 
+let barChartLabels = [];
+let barChartData = [];
+
 export default class Stats extends React.Component {
   constructor(props) {
     super(props);
@@ -60,6 +64,8 @@ export default class Stats extends React.Component {
       expenses: [],
       isExpanded: false,
       pieChartData: [],
+      barChartDataLabels: [],
+      barChartData: [],
       lineItems: null
     };
     this.handleSelect = this.handleSelect.bind(this);
@@ -77,6 +83,8 @@ export default class Stats extends React.Component {
   makeLineItems(array) {
     const dates = array.map(date => {
       const formattedDate = formatMonthDayYear(date.date);
+      barChartLabels.push(formattedDate);
+      let dailyTotal = 0;
       const categories = date.expenses.map(category => {
         let header;
         let items;
@@ -85,6 +93,7 @@ export default class Stats extends React.Component {
             header = categoryHeaders[i].header;
             items = category.expenses.map(item => {
               categoryHeaders[i].total += item.amount;
+              dailyTotal += item.amount;
               if (item.notes) {
                 return (
                   <li className='line-item-list-item-li' key={item.expenseId}>
@@ -119,6 +128,9 @@ export default class Stats extends React.Component {
           </ul>
         );
       });
+
+      barChartData.push(dailyTotal);
+
       return (
         <ol className='line-item-list' key={date.date}>
           <h3 className='line-item-list-date'>{formattedDate}</h3>
@@ -144,7 +156,7 @@ export default class Stats extends React.Component {
       .then(expenses => {
         const lineItems = this.makeLineItems(expenses);
         const pieChartData = this.makePieChartData(categoryHeaders);
-        this.setState({ expenses, tripId: event.target.value, lineItems, pieChartData });
+        this.setState({ expenses, tripId: event.target.value, lineItems, pieChartData, barChartDataLabels: barChartLabels, barChartData });
       });
   }
 
@@ -156,6 +168,8 @@ export default class Stats extends React.Component {
     for (let i = 0; i < categoryHeaders.length; i++) {
       categoryHeaders[i].total = 0;
     }
+    barChartLabels = [];
+    barChartData = [];
 
     if (!this.state.tripId) {
       return (
@@ -179,14 +193,14 @@ export default class Stats extends React.Component {
               onChange={this.handleSelect}
             />
           </form>
-          <button className='daily-expenses-button' onClick={this.handleClick}>Daily Expenses</button>
+          <button className='daily-expenses-button' onClick={this.handleClick}>View Line Items</button>
           <div>
             <h3 className='trip-expenses-header'>Trip Expenses:</h3>
             <PieChart data={{
               labels: [
                 `Admin. $${this.state.pieChartData[0]}`,
-                `Food $${this.state.pieChartData[1]}`,
-                `Med. $${this.state.pieChartData[2]}`,
+                `Food $${this.state.pieChartData[2]}`,
+                `Med. $${this.state.pieChartData[1]}`,
                 `Trans. $${this.state.pieChartData[3]}`,
                 `Shop. $${this.state.pieChartData[4]}`,
                 `Ent. $${this.state.pieChartData[5]}`,
@@ -211,6 +225,18 @@ export default class Stats extends React.Component {
               }]
             }} />
           </div>
+          <div>
+            <h3 className='trip-expenses-header'>Daily Expenses:</h3>
+            <BarChart data={{
+              labels: this.state.barChartDataLabels,
+              datasets: [{
+                label: 'Daily Expenses',
+                data: this.state.barChartData,
+                backgroundColor: 'rgb(10, 103, 241)'
+              }]
+            }} />
+
+          </div>
         </div>
       );
     }
@@ -223,7 +249,7 @@ export default class Stats extends React.Component {
             onChange={this.handleSelect}
           />
         </form>
-        <button className='daily-expenses-button' onClick={this.handleClick}>Daily Expenses</button>
+        <button className='daily-expenses-button' onClick={this.handleClick}>View Line Items</button>
         <div className='line-item-list-container'>
           {this.state.lineItems}
         </div>
