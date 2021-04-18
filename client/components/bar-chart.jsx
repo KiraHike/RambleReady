@@ -6,7 +6,7 @@ export default class PieChart extends React.Component {
     return (
       <Bar
         width={300}
-        height={210}
+        height={150}
         data={this.props.data}
         options={{
           legend: {
